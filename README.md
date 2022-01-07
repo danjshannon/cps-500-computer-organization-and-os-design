@@ -1,2 +1,7 @@
-# cps-500-computer-organization-and-os-design
-CPS 500 Computer Organization and Operating System Design course notes.
+# CPS 500 Computer Organizatoin and Oprating System Design | *Syracuse University*
+## cps-500-computer-organization-and-os-design
+
+
+### Async Table of Contents
+- [Week 1: Introduction](/async/week1_intro/README.md#week-1-introduction)
+### Algorithms and Data-Structures Table of Contents
