@@ -23,4 +23,7 @@
 > Always bear in mind that the only complete and reliable measure of computer performance is time. Figure 1.15 shows the basic measurements at different levels in the computer and what is being measured in each case. We can see how these factors are combined to yield execution time measured in seconds per program:
 
 
-```Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/ClockCycle```
+$
+Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/ClockCycle
+$
+<hr>
