@@ -2,7 +2,7 @@
 ### Patterson and Hennessy
 
 ## The Big Picture
-[Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1-Computer-Abstractions-and-Technology)
+[Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
 <hr>
 
 ## Chapter 1 | *Computer Abstractions and Technology*
