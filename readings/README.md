@@ -16,8 +16,10 @@
 |CPU Execution time for a program|Seconds for the program|
 |Instruction Count|Instructions executed for the program|
 |Clock cycles per instruction (CPI)|Average number of clock cylces per instruction|
-|Clock cycle time|Seconds per clock cycle|\\
+|Clock cycle time|Seconds per clock cycle|
+
+
 *Figure 1.15*
 > Figure 1.15 shows the basic measurements at different levels in the computer and what is being measured in each case. We can see how these factors are combined to yield execution time measured in seconds per program:
-> `Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/ClockCycle`
+> ```Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/ClockCycle```
 > Always bear in mind that the only complete and reliable measure of computer performance is time.
