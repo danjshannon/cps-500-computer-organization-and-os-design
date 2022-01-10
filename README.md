@@ -4,4 +4,4 @@
 
 ### Async Table of Contents
 - [Week 1: Introduction](/async/week1_intro/README.md#week-1-introduction)
-### Algorithms and Data-Structures Table of Contents
+### Computer Organization and Design Table of Contents
