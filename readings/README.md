@@ -6,15 +6,17 @@
 
 # Chapter 1 | *Computer Abstractions and Technology*
 - > The five classic components of a computer are input, output, memory, datapath, and control, with the last two sometimes combined and called the processor.
-
 <br>
 <hr>
 
 - > Both hardware and software consist of hierarchical layers using abstraction, with each lower layer hiding details from the level above. One key interface between the levels of abstraction is the *instruction set architecture* - the interface between the hardware and low-level software. This abstract interface enables many *implementations* of varying cost and perfomance to run identical software.
-
 <br>
 <hr>
 
+- > Always bear in mind that the only complete and reliable measure of computer performance is time. Figure 1.15 shows the basic measurements at different levels in the computer and what is being measured in each case. We can see how these factors are combined to yield execution time measured in seconds per program:
+```
+Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/clockCycle
+```
 | Components of Performance | Units of Measure |
 |---|---|
 |CPU Execution time for a program|Seconds for the program|
@@ -23,11 +25,6 @@
 |Clock cycle time|Seconds per clock cycle|
 
 *Figure 1.15*
-- > Always bear in mind that the only complete and reliable measure of computer performance is time. Figure 1.15 shows the basic measurements at different levels in the computer and what is being measured in each case. We can see how these factors are combined to yield execution time measured in seconds per program:
-```
-Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/clockCycle
-```
-
 <br>
 <hr>
 
@@ -35,4 +32,4 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 # Chapter 2 | *Instructions*
 
->
+- >
