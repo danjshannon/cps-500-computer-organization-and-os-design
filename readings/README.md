@@ -1,16 +1,18 @@
 # Computer Organization and Design | *The Hardware/Software Interface*
-### Patterson and Hennessy
+## Patterson and Hennessy
+- [Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
+- [Chapter 2 | *Instructions*](#Chapter-2--Instructions)
 
-## The Big Picture
-[Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
+
+# Chapter 1 | *Computer Abstractions and Technology*
+- > The five classic components of a computer are input, output, memory, datapath, and control, with the last two sometimes combined and called the processor.
+
+<br>
 <hr>
 
-## Chapter 1 | *Computer Abstractions and Technology*
+- > Both hardware and software consist of hierarchical layers using abstraction, with each lower layer hiding details from the level above. One key interface between the levels of abstraction is the *instruction set architecture* - the interface between the hardware and low-level software. This abstract interface enables many *implementations* of varying cost and perfomance to run identical software.
 
-> The five classic components of a computer are input, output, memory, datapath, and control, with the last two sometimes combined and called the processor.
-<hr>
-
-> Both hardware and software consist of hierarchical layers using abstraction, with each lower layer hiding details from the level above. One key interface between the levels of abstraction is the *instruction set architecture* - the interface between the hardware and low-level software. This abstract interface enables many *implementations* of varying cost and perfomance to run identical software.
+<br>
 <hr>
 
 | Components of Performance | Units of Measure |
@@ -25,6 +27,12 @@
 ```
 Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Seconds/clockCycle
 ```
+
+<br>
 <hr>
 
-> Execution time is the only valid and unimpeachable measure of performance. Many other metrics have been proposed and found wanting. Sometimes these metrics are flawed from the start by not relfecting execution time; other times a metric that is valid in a limited context is extended and used beyond that context or without the additional clarification needed to make it valid.
+- > Execution time is the only valid and unimpeachable measure of performance. Many other metrics have been proposed and found wanting. Sometimes these metrics are flawed from the start by not relfecting execution time; other times a metric that is valid in a limited context is extended and used beyond that context or without the additional clarification needed to make it valid.
+
+# Chapter 2 | *Instructions*
+
+>
