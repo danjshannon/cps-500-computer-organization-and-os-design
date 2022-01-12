@@ -240,11 +240,11 @@ yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
   - Aim for 6s CPU time
   - Can do faster clock, but causes 1.2 X clock cycles of computer A
 
-> ClockRateB = ClockCyclesB/CPUTimeB = (1.2 &times; ClockCyclesA)/6s
+> ClockRateB = ClockCyclesB / CPUTimeB = (1.2 &times; ClockCyclesA) / 6s
 
-> ClockCyclesA = CPUTimeA &times; ClockRateA = 10s &times; 2GHz = 20x10<sup>9</sup>
+> ClockCyclesA = CPUTimeA &times; ClockRateA = 10s &times; 2GHz = 20&times;10<sup>9</sup>
 
->ClockRateB = (1.2 &times; 20 &times; 10<sup>9</sup>)/6s = (24x10<sup>9</sup>)/6s = 4GHz
+>ClockRateB = (1.2 &times; 20 &times; 10<sup>9</sup>) / 6s = (24x10<sup>9</sup>) / 6s = 4GHz
 
 ### Instruction Count and CPI
 - **Cycles Per Instruction (CPI)**
@@ -256,7 +256,7 @@ yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
     - Average CPI affected by instruction mix
 > Clock Cycles = Instruction Count &times; Cycles per Instruction
 
-> CPU Time = Instruction Count &times; CPI &times; Clock Cycle Time = Instruction Count &times; CPI/Clock Rate
+> CPU Time = Instruction Count &times; CPI &times; Clock Cycle Time = Instruction Count &times; CPI / Clock Rate
 
 ### Example CPI
 - Same ISA
@@ -268,7 +268,7 @@ yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
 
 > CPUTime<sub>B</sub> = InstructionCount &times; CPI<sub>B</sub> &times; CycleTime<sub>B</sub>
 
->CPUPerformance<sub>A</sub>/CPUPerformance<sub>B</sub> = CPUTime<sub>B</sub>/CPUTime<sub>A</sub> = 600ps &times; P/500ps &times; P = 1.2
+>CPUPerformance<sub>A</sub>/CPUPerformance<sub>B</sub> = CPUTime<sub>B</sub> / CPUTime<sub>A</sub> = 600ps &times; P / 500ps &times; P = 1.2
 
 ### More CPI (Instruction Mix)
 - If different instruction classes take different numbers of cycles, then we count CPI and number of instructions per class:
