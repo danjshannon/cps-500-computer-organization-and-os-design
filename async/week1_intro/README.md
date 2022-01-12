@@ -85,16 +85,180 @@
 - Processor and memory system
   - Determine how fast instructions are executed
 - I/O system (including OS)
-  - Determines how fast I/O operations are executed
+  - Determines how fast IO operations are executed
 
 ## 1.4 Under the Covers
 ### Abstract Components of a Computer
 Five classic components of a computer:
-
-<img src='abstractComputer.png' title='Abstract Computer'>
 
 1. Input
 2. Output
 3. Memory
 4. Datapath
 5. Control
+
+<img src='abstractComputer.png' title='Abstract Computer'>
+
+### Computer Hardware Terminology
+- **Motherboard**: The main printed circuit board
+  - Connect to IO
+  - Memory
+  - CPU
+- **Memory (RAM)**: Where programs are kept along with their needed data
+- **Centra Processing Unit (CPU)**: Follows instructions of programs: Adds numbers, tests numbers, signals I/O devices and so on
+
+### Inside the Processor (CPU)
+- **Datapath**: Performs arithmetic operations on data
+- **Control**: Sequences datapath, memory, IO devices
+- **Cache Memory**: Small, fast SRAM memory for immediate access to data
+
+### A Safe Place for Data
+- Volatile main memory
+  - Loses data when power turns off
+- Nonvolatile secondary memory
+  - Magnetic disk
+  - Flash memory
+  - Optical disks (CD-ROM, DVD)
+
+### Networks
+- Communication, resource sharing, nonlocal access
+- Local area network (LAN): Ethernet
+- Wide area network (WAN): The Internet
+- Wireless network: WiFi, Bluetooth
+
+### Instruction Set Architecture
+- The ISA (of architecture) of a machine informs programmers how to make a binary program work correctly. This is the **interface** between hardware and  low-level software
+- The basic instruction set and the operating system interface are called the **application binary interface**
+- The implementation of computer hardware needs to adhere to the architecture abstraction
+
+## 1.5 Processor and Memory
+
+### Processor Technologies
+- **Vacuum tube**: Hollow, airless glass tube electron beam to transfer data; *predecessor of transistor*
+- **Transistor**: An on/off switch controlled by electric signal
+- **Integrated Circuit**: Combines dozens to hundreds of transistors on a single chip
+- **Very large-scale integrated circuit (VSLI)**: Millions of transistors
+
+### Memory Technology
+- **Static Random Access Memory (SRAM)**: CPU Cache, more expensive, volotile, quick
+  - Subset of RAM used more frequently
+- **Dynamic Random Access Memory (DRAM)**: Volatile, slower than SRAM.
+  - Main memory RAM
+- Growth of DRAM capacity
+- slower than processor capacity
+- 20 years to improve from 1M to 1G Kbit capacity
+
+### Manufacturing a Chip
+- Silicon: Substance found in sand; is a **semiconductor** (not a good conductor)
+- Add materials to transform properties
+  1. Conductors: Using microscopic copper or aluminum wire
+  2. Insulators: Plastic sheething or glass
+  3. Switches: Areas that conduct OR insulate under special conditions
+
+### Chip Manufacturing Process
+- **Wafer**: slice of silicon ingot less than 0.1 inch thick
+- A single microscopic flaw (**defects**) in a wafer can result in failure
+- Put multiple independent components on a single wafer
+- The patterned wafer is diced into these components (**dies**)
+- Only discard dies that contain flaws
+- **Yield** is the percentage of good dies from the wafer
+
+### Integrated Circuit Cost
+
+>cost per die = cost per wafer / (dies per wafer * yield)
+dies per wafer &approx; wafer area/die area
+yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
+
+- Nonlinear relation to area and defect rate
+  - Wafer cost and area are fixed
+  - Defect rate determined by manufacturing process
+  - Die area determined by architecture and circuit design
+
+## 1.6 Performance
+
+### Response Time and Throughput
+- **Response time**: How long it takes to do a task; time between start and end
+- **Throughput**: Total work done per unit time
+- How are response time and throughput affected by:
+  - *Replacing the processor with a faster version?*
+    - Response time increases with throughput
+  - *Adding more processors?*
+    - May increase throughput but not necessarily response time
+  - *Does increasing one necessarily increase the other?*
+
+### Relative Perfomance
+- Define Performance `1/Execution Time`
+- X is N-times faster than Y
+
+>Perfomance<sub>x</sub>/Performance<sub>y</sub> = Execution Time<sub>y</sub>/Execution Time<sub>x</sub>
+
+- Example:
+  - 10ms on A, 15ms on B
+  - 15ms/10ms = 1.5
+  - So A is 1.5 times faster than B
+
+### Measuring Execution Time
+- Elapsed time
+  - Total response time, including all aspects
+    - Processing, IO, OS Overhead, idle time
+  - Determines system performance
+- CPU Time
+  - Time spent processing a given job
+    - Discounts IO, other jobs's shares
+  - Comprises user CPU time and system CPU time
+  - Different programs are affected differently by CPU and system performances
+
+### CPU Clocking
+- Operation of digital hardware governe by a constant rate clock
+- Clock period = duration of a clock cycle
+  - E.g., 250ps = 0.25ns = 250x10<sup>-12</sup>s
+- Clock frequency (rate): cycles per second
+  - E.g., 4.0GHz = 4000MHz = 4.0x10<sup>9</sup>
+
+### CPU Time
+>CPU Time = CPU Clock Cycles x Clock Cycle Time = CPU Clock Cycles/Clock Rate
+
+- Performance improved by
+  - Reducing number of clock cycles
+  - Increasing clock rate
+  - Hardware designer must often trade off clock rate against cycle count
+
+### Example: CPU Time
+- Computer A: 2GHz clock, 10s CPU time
+- Designing computer B
+  - Aim for 6s CPU time
+  - Can do faster clock, but causes 1.2 X clock cycles of computer A
+
+> ClockRateB = ClockCyclesB &divide; CPUTimeB = (1.2 &times; ClockCyclesA) &divide; 6s
+
+> ClockCyclesA = CPUTimeA &times; ClockRateA = 10s &times; 2GHz = 20x10<sup>9</sup>
+
+>ClockRateB = (1.2 &times; 20 &times; 10<sup>9</sup>) &divide; 6s = (24x10<sup>9</sup>) / 6s = 4GHz
+
+### Instruction Count and CPI
+- **Cycles Per Instruction (CPI)**
+- Instruction count for a program
+  - Determined by program, ISA (Instruction Set Architecture) and compiler
+- Average cycles per instruction
+  - Determined by CPU hardware
+  - If different instructions have different CPI
+    - Average CPI affected by instruction mix
+> Clock Cycles = Instruction Count &times; Cycles per Instruction
+
+> CPU Time = Instruction Count &times; CPI &times; Clock Cycle Time = Instruction Count &times; CPI &divide; Clock Rate
+
+### Example CPI
+- Same ISA
+  - Computer A: cycle time = 250ps, CPI=2.0
+  - Computer B: cycle time = 500ps, CPI=1.2
+- Which is faster, and by how much?
+  - Let P be the instruction count for a given program.
+> CPUTime<sub>A</sub> = InstructionCount &times; CPI<sub>A</sub> &times; CycleTime<sub>A</sub>
+
+> CPUTime<sub>B</sub> = InstructionCount &times; CPI<sub>B</sub> &times; CycleTime<sub>B</sub>
+
+>CPUPerformance<sub>A</sub> / CPUPerformance<sub>B</sub> = CPUTime<sub>B</sub> / CPUTime<sub>A</sub> = 600ps &times; P / 500ps &times; P = 1.2
+
+### More CPI (Instruction Mix)
+- If different instruction classes take different numbers of cycles, then we count CPI and number of instructions per class:
+> Clock Cycles = &sum;<sup>n</sup><sub>i=1</sub>(CPI<sub>i</sub> &times; Instruction Count<sub>i</sub>)
