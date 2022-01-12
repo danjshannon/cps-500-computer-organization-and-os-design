@@ -1,9 +1,18 @@
 # Week 1 Introduction
 
+- [1.1 Readings](#11-Readings)
+- [1.2 The Information Revolution](#12-The-Information-Revolution)
+- [1.3 Program Performance](#13-Program-Performance)
+- [1.4 Under the Covers](#14-Under-the-covers)
+- [1.5 Processor and Memory](#15-processor-and-memory)
+- [1.6 Performance](#16-Performance)
+
 ## 1.1 Readings
+[top](#week-1-Introduction)
 - Patterson and Hennesy
   - [Chapter 1 | *Computer Abstractions and Technology*](/readings/README.md#Chapter-1--Computer-Abstractions-and-Technology)
 ## 1.2 The Information Revolution
+[top](#week-1-Introduction)
 1. **Agricultural Revolution** 10,000 B.C.
 2. **Industrial Revolution** 18<sup>th</sup> century
 3. **Information Revolution** (20<sup>th</sup> and 21<sup>st</sup> century)
@@ -55,6 +64,7 @@
 |yottabyte|YB|10<sup>24</sup>|yobibyte|YiB|2<sup>80</sup>|21%|
 
 ## 1.3 Program Performance
+[top](#week-1-Introduction)
 ### Below Your Program
 - Application software (**program**)
   - Written in high-level language
@@ -88,6 +98,7 @@
   - Determines how fast IO operations are executed
 
 ## 1.4 Under the Covers
+[top](#week-1-Introduction)
 ### Abstract Components of a Computer
 Five classic components of a computer:
 
@@ -132,7 +143,7 @@ Five classic components of a computer:
 - The implementation of computer hardware needs to adhere to the architecture abstraction
 
 ## 1.5 Processor and Memory
-
+[top](#week-1-Introduction)
 ### Processor Technologies
 - **Vacuum tube**: Hollow, airless glass tube electron beam to transfer data; *predecessor of transistor*
 - **Transistor**: An on/off switch controlled by electric signal
@@ -175,7 +186,7 @@ yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
   - Die area determined by architecture and circuit design
 
 ## 1.6 Performance
-
+[top](#week-1-Introduction)
 ### Response Time and Throughput
 - **Response time**: How long it takes to do a task; time between start and end
 - **Throughput**: Total work done per unit time
