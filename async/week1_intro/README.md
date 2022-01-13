@@ -6,6 +6,7 @@
 - [1.4 Under the Covers](#14-Under-the-covers)
 - [1.5 Processor and Memory](#15-processor-and-memory)
 - [1.6 Performance](#16-Performance)
+- [1.7 Power and Parallelism](#17-power-and-parallelism)
 
 ## 1.1 Readings
 [top](#week-1-Introduction)
@@ -273,3 +274,45 @@ yield = 1/(1+(defects per area * (die area/2)))<sup>2</sup>
 ### More CPI (Instruction Mix)
 - If different instruction classes take different numbers of cycles, then we count CPI and number of instructions per class:
 > Clock Cycles = &sum;<sup>n</sup><sub>i=1</sub>(CPI<sub>i</sub> &times; Instruction Count<sub>i</sub>)
+
+## 1.7 Power and Parallelism
+[top](#week-1-Introduction)
+
+### Power
+- In CMOS IC technology
+  - Power = Capacitive Load &times; Voltage<sup>2</sup> &times; Frequency
+  - Capacitive Load: Energy needed for charging and releasing a capacitor
+- Relative Power
+  - New CPU with 85 percent of capacitive load, 15% voltage and 15% frequency reduction
+
+> P<sub>new</sub>/P<sub>old</sub> = (C<sub>old</sub>&times;0.85&times;(V<sub>old</sub>&times;0.85)<sup>2</sup>&times;F<sub>old</sub>&times;0.85) / (C<sub>old</sub>&times;V<sub>old</sub><sup>2</sup>&times;F<sub>old</sub>) = 0.85<sup>4</sup>
+
+### Fallacy: Low Power at Idle
+- Look back at i7 power benchmark
+  - At 100 percent load: 258W
+  - At 50 percent load: 170W (66 percent)
+  - At 10 percent load: 121W (47 percent)
+- Google data center
+  - Mostly operates at 10-50 percent load
+  - At 100% load less than 1 percent of the time
+- Consider designing process to make power proportional to load
+
+### Multiprocessors
+- Multicore microprocessors
+  - More than one processor per chip
+- Requires explicitly parallel programming
+  - Compare with instruction-level parallelism
+  - Hidden from programmer
+- Hard to do
+  - Programming for performance
+  - Load balancing
+  - Optimizing communication synchronization
+
+### Pitfall: Amdahl's Law
+- Improving an aspect of a computer and expecting a proportional improvement in overall performance
+
+> T<sub>improved</sub> = (T<sub>affected</sub>/Improvement Factor) + T<sub>unaffected</sub>
+
+- Example: multiple operation accounts for 80s out of 100s
+  - How much improvement in performance to get 5x overall?
+- Corollary: **Make the commom case fast**
