@@ -28,11 +28,14 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 # Chapter 2 | *Instructions*
 
 ### Vocab
-- **instruction set** *The vocabulary of commands understood by a given* architecture.
-- **stored-program concept** *The idea that instructions and data of many types can be stored in memory as numbers, leading to the stored program* computer.
-- **word** *The natural unit of access in a computer, usually a group of 32 bits; corresponds to the size of a register in the MIPS architecture.*
+>**instruction set** *The vocabulary of commands understood by a given* architecture.
+
+>**stored-program concept** *The idea that instructions and data of many types can be stored in memory as numbers, leading to the stored program* computer.
+
+>**word** *The natural unit of access in a computer, usually a group of 32 bits; corresponds to the size of a register in the MIPS architecture.*
 
 ### Notes
+
 **Design Principals:**
-1. > Simplicity favors regularity.
-2. > Smaller is faster.
+1. *Simplicity favors regularity.*
+2. *Smaller is faster.*

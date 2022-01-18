@@ -3,5 +3,5 @@
 ### Computer Organization and Design Table of Contents
 
 ### Async Table of Contents
-- [Readings](/readings/README.md/#Computer-Organization-and-Design---The-Hardware-Software-Interface)
+- [Readings](/readings/README.md/#computer-organization-and-design--the-hardwaresoftware-interface)
 - [Week 1: Introduction](/async/week1_intro/README.md#week-1-introduction)
