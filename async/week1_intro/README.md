@@ -10,8 +10,10 @@
 
 ## 1.1 Readings
 [top](#week-1-Introduction)
-- Patterson and Hennesy
-  - [Chapter 1 | *Computer Abstractions and Technology*](/readings/README.md#Chapter-1--Computer-Abstractions-and-Technology)
+
+*Patterson and Hennesy*
+[Chapter 1 | *Computer Abstractions and Technology*](/readings/README.md#Chapter-1--Computer-Abstractions-and-Technology)
+
 ## 1.2 The Information Revolution
 [top](#week-1-Introduction)
 1. **Agricultural Revolution** 10,000 B.C.
