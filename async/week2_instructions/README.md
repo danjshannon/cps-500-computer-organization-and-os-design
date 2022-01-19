@@ -188,9 +188,12 @@ add $s0, $s0, $t0
 - Range: [0, &plus;2<sup>n</sup> &minus; 1]
 - Example:
 > base<sub>2</sub>: 0000 0000 0000 0000 0000 0000 0000 1011
-      > = 0 + ... + 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 1&times;2<sup>0</sup>
-      > = 0 + ... + 8 + 0 + 2 + 1
-  base<sub>10</sub>: 11
+
+> = 0 + ... + 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 1&times;2<sup>0</sup>
+
+> = 0 + ... + 8 + 0 + 2 + 1
+
+> base<sub>10</sub>: 11
 - Using 32 bits:
   - 0 to &plus;4,294,697,295
 
