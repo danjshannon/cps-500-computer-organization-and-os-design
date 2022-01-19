@@ -113,7 +113,7 @@ lw $t0 32($s3)    # load word, temp register $t0 gets A[8]
 add $s1, $s2, $t0 # add $s2 and $t0 and set to $s1
 ```
 
-### Async Question 1
+#### Async Question 1
 > Which answer correctly translates the following C code into MIPS: A[2] = A[1] + x? (Assume x is in \$s0, and the base address of integer array A is in \$s1.)
 
 ```
@@ -172,7 +172,7 @@ addi $s2, $s1, -1
 add $t2, $s1, $zero # move $s1 to $t2
 ```
 
-### Async Question 2
+#### Async Question 2
 > Which answer correctly translates the following C code in to MIPS: x = A[3] + x; (Assume x is in \$s0 and the base address of integer array A is in \$s1).
 
 ```
@@ -182,3 +182,80 @@ add $s0, $s0, $t0
 
 ## 2.4 Integer Representations
 ([top](#week-2-Instructions))
+
+### Unsigned Binary Integers
+- Given an n-bit number
+- Range: [0, &plus;2<sup>n</sup> &minus; 1]
+- Example:
+> base<sub>2</sub>: 0000 0000 0000 0000 0000 0000 0000 1011
+      = 0 + ... + 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 1&times;2<sup>0</sup>
+      = 0 + ... + 8 + 0 + 2 + 1
+  base<sub>10</sub>: 11
+- Using 32 bits:
+  - 0 to &plus;4,294,697,295
+
+### Two's Compliment Signed Integers
+- bit 31 is sign bit
+  - 1 for negative numbers
+  - 0 for non-negative numbers
+- -(-2<sup>n-1</sup>) can't be represented
+- non-negative numbers have same unsigned and 2s-complement representation
+- Given an n-bit number
+- Range: [&minus;2<sup>n-1</sup>, &plus;2<sup>n-1</sup>&minus;1]
+
+Example:
+> base<sub>2</sub>: 1111 1111 1111 1111 1111 1111 1111 1100
+= &minus;1&times;2<sup>31</sup> &plus; 1&times;2<sup>30</sup> &plus; ... &plus; 1&times;2<sup>2</sup> &plus; 0&times;2<sup>1</sup> &plus; 1&times;2<sup>0</sup> &plus; 0&times;2<sup>0</sup>
+= &minus;2,147,483,648 &plus; 2,147,483,644
+base<sub>10</sub>: &minus;4
+- Using 32 bits:
+  - &minus;2,147,483,658 to &plus;2,147,483,647
+
+- Some Specific Numbers:
+  - 0: 0000 0000 ... 0000
+  - &minus;1: 1111 1111 ... 1111
+  - Most-negative: 1000 0000 ... 0000
+  - Most-positive: 0111 1111 ... 1111
+  - (the most negative number is one greater than the most positive number)
+
+#### Async Question
+> What is the following two's complement binary number in base 10: 10001011?
+```
+-1 * 2^7 = -128
++... 0
++1 * 2^3 = 8
++0 * 2^2 = 0
++1 * 2^1 = 2
++1 * 2^0 = 1
+------------
+-117
+```
+
+### Signed Negation
+- Complement and add 1
+- Complement means 1&rarr;0, 0&rarr;1
+- Example: negate
+  - &plus;2 = 0000 0000 ... 0010<sub>2</sub>
+  - &minus;2 = 1111 1111 ... 1101<sub>2</sub> + 1 =  1111 1111 ... 1110<sub>2</sub>
+
+### Sign Extension
+- Representing a number using more bits
+  - Preserve the numeric value
+- In MIPS instruction set
+  - addi: extend immediate value
+  - lb, lh: extend loaded byte/halfword
+  - beq, bne: extend the displacement
+
+- Replicate the sign bit to the left
+  - C.f. unsigned values, extend with 0s
+- Examples: 8-bit to 16-bit
+> &plus;2: 0000 0010 	&rArr; 0000 0000 0000 0000
+  &minus;2: 1111 1110 &rArr; 1111 1111 1111 1110
+
+#### Async Question
+> What is the signed negation of the following binary number: 01001011?
+```
+compliment: 10110100
+        +1: 10110101
+```
+
