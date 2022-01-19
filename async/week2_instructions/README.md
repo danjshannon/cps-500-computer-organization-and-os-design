@@ -208,9 +208,12 @@ add $s0, $s0, $t0
 
 Example:
 > base<sub>2</sub>: 1111 1111 1111 1111 1111 1111 1111 1100
+
 > = &minus;1&times;2<sup>31</sup> &plus; 1&times;2<sup>30</sup> &plus; ... &plus; 1&times;2<sup>2</sup> &plus; 0&times;2<sup>1</sup> &plus; 1&times;2<sup>0</sup> &plus; 0&times;2<sup>0</sup>
-= &minus;2,147,483,648 &plus; 2,147,483,644
-base<sub>10</sub>: &minus;4
+
+> = &minus;2,147,483,648 &plus; 2,147,483,644
+
+> base<sub>10</sub>: &minus;4
 - Using 32 bits:
   - &minus;2,147,483,658 to &plus;2,147,483,647
 
@@ -253,6 +256,7 @@ base<sub>10</sub>: &minus;4
   - C.f. unsigned values, extend with 0s
 - Examples: 8-bit to 16-bit
 > &plus;2: 0000 0010 	&rArr; 0000 0000 0000 0000
+
 > &minus;2: 1111 1110 &rArr; 1111 1111 1111 1110
 
 #### Async Question
