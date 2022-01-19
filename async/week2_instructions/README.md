@@ -1,17 +1,15 @@
 # Week 2 Instructions
 
-- [2.1 Readings](#21-Readings)
-- [2.2 The Information Revolution](#22-Operations-and-operands)
-- [2.3 Program Performance](#23-memory-operands)
+- [2.1 Readings](#21-Readings-top)
+- [2.2 The Information Revolution](#22-Operations-and-operands-top)
+- [2.3 Program Performance](#23-memory-operands-top)
 
-## 2.1 Readings
-([top](#week-2-Instructions))
+## 2.1 Readings ([top](#week-2-Instructions))
 
 *Patterson and Hennesy*
 [Chapter 2 | *Instructions: Language of the Computer*](/readings/README.md#Chapter-2--Instructions-Language-of-the-computer)
 
-## 2.2 Operations and Operands
-([top](#week-2-Instructions))
+## 2.2 Operations and Operands ([top](#week-2-Instructions))
 
 ### Instruction Set
 - The repertoire of instructions of a compiler
@@ -78,8 +76,7 @@ add $t1, $s3, $s4
 sub $s0, $t0, $t1
 ```
 
-## 2.3 Memory Operands
-([top](#week-2-Instructions))
+## 2.3 Memory Operands ([top](#week-2-Instructions))
 
 
 ### Memory Operands
