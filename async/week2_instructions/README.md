@@ -5,6 +5,7 @@
 - [2.3 Program Performance](#23-memory-operands)
 - [2.4 Integer Representations](#24-integer-representations)
 - [2.5 Instruction Representation](#25-instruction-representation)
+- [2.6 Logical Operations](#26-logical-operations)
 
 ## 2.1 Readings
 ([top](#week-2-Instructions))
