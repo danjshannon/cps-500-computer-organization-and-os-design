@@ -1,5 +1,6 @@
 # Week 1 Introduction
 
+- [Home](/README.md)
 - [1.1 Readings](#11-Readings)
 - [1.2 The Information Revolution](#12-The-Information-Revolution)
 - [1.3 Program Performance](#13-Program-Performance)

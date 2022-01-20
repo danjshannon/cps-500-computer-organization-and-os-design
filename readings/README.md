@@ -1,5 +1,6 @@
 # Computer Organization and Design | *The Hardware/Software Interface*
 ## Patterson and Hennessy
+- [Home](/README.md)
 - [Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
 - [Chapter 2 | *Instructions: Language of the computer*](#Chapter-2--Instructions-Language-of-the-computer)
 
@@ -63,13 +64,13 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 >**hexadecimal** *Numbers in base 16*
 
->**MIPS fields**
-> - op: Basic operation of the instruction, traditionally called the opcode
-> - rs: The first register source operand
-> - rt: The second register source operand
-> - rd: The register destination operand. It gets the result of the operation
-> - shamt: Shift amount.
-> - funct: Function. This field, often called the function code, selects the specific variant of the operation in the op field.
+> **MIPS fields**
+> - **op**: *Basic operation of the instruction, traditionally called the opcode*
+> - **rs**: *The first register source operand*
+> - **rt**: *The second register source operand*
+> - **rd**: *The register destination operand. It gets the result of the operation*
+> - **shamt**: *Shift amount*
+> - **funct**: *Function. This field, often called the function code, selects the specific variant of the operation in the op field*
 
 >**opcode** *The field that denotes the operation and format of an instruction*
 
