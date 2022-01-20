@@ -4,6 +4,7 @@
 - [2.2 The Information Revolution](#22-Operations-and-operands)
 - [2.3 Program Performance](#23-memory-operands)
 - [2.4 Integer Representations](#24-integer-representations)
+- [2.5 Instruction Representation](#25-instruction-representation)
 
 ## 2.1 Readings
 ([top](#week-2-Instructions))
@@ -266,3 +267,98 @@ compliment: 10110100
         +1: 10110101
 ```
 
+## 2.5 Instruction Representation
+([top](#week-2-Instructions))
+
+- Instructions are encoded in binary
+  - called machine code
+- MIPS instructions
+  - Encoded as 32-bit (4 bytes) instruction words
+  - Small numbe rof formats encoding operation code (opcode), register numbers, and so on
+  - Regularity!
+
+### Representing Instructions
+- Register numbers
+- `$t0 - $t7` are registers 8-15
+- `$t8 - $t9` are registers 24-25
+- `$s0 - $s7` are registers 16-23
+
+| Register | Variable |
+|:---:|:---:|
+|0|$zero|
+|...|...|
+|8|$t0|
+|9|$t1|
+|10|$t2|
+|11|$t3|
+|12|$t4|
+|13|$t5|
+|14|$t6|
+|15|$t7|
+|16|$s0|
+|17|$s1|
+|18|$s2|
+|19|$s3|
+|20|$s4|
+|21|$s5|
+|22|$s6|
+|23|$s7|
+|24|$t8|
+|25|$t9|
+
+### MIPS R-Format Instrcutions
+
+|op|rs|rt|rd|shamt|funct|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|6 bits|5 bits|5 bits|5 bits|5 bits|6 bits|
+
+- Instruction Fields
+  - op: operation code (opcode)
+  - rs: first source register number
+  - rt: second source register number
+  - rd: destination register number
+  - shamt: shift amount (00000 for now)
+  - funct: function code (extends opcode)
+
+### R-Format Example
+
+```
+add $t0, $s1, $s2
+```
+
+| |op|rs|rt|rd|shamt|funct|
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+|**assembly**|special|$s1|$s2|$t0|0|add|
+|**register**|0|17|18|8|0|32|
+|**machine**|000000|10001|10010|01000|00000|100000|
+
+> 00000010001100100100000000100000<sub>2</sub> = 02324020<sub>16</sub>
+
+### Hexadecimal
+- Base 16
+  - Compact representation of bit strings
+  - 4 bits per hex digit
+
+|h|b|h|b|h|b|h|b|
+|---|---|---|---|---|---|---|---|
+|**0**|0000|**4**|0100|**8**|1000|**c**|1100|
+|**1**|0001|**5**|0101|**9**|1001|**d**|1101|
+|**2**|0010|**6**|0110|**10**|1010|**e**|1110|
+|**3**|0011|**7**|0111|**11**|1011|**f**|1111|
+
+- Example
+  - hex:    `eca8 6420`
+  - binary: `1110 1100 1010 1000 0110 0100 0010 0000`
+
+### MIPS I-Format Instructions
+|op|rs|rt|constant or address|
+|:---:|:---:|:---:|:---:|
+|6 bits|5 bits|5 bits|16 bits|
+
+- Immediate arithmetic and load/store instructions
+  - rt: destination or source register number
+  - Constant: &minus;2<sup>15</sup> to &plus;2<sup>15</sup>&minus;1
+  - Address: offset added to base address in rs
+- **Design principle 4**: *Good design demands good compromises*
+  - Different formats complicate decoding but allow 32-bit instructions uniformly
+  - Keep formats as similar as possible

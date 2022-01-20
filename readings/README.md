@@ -27,6 +27,17 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 # Chapter 2 | *Instructions: Language of the Computer*
 
+### The Big Picture
+> Today's computers are built on two key principles:
+>   1. Instructions are represented as numbers.
+>   2. Programs are stored in memory to be read or written; just like numbers;
+> 
+> These principles lead to the stored-program concept; its invention let the computing genie out of its bottle. Figure 2.7 shows the power of the concept specifically, memory can contain the source code for an editor program, the corresponding compiled machine code, the text that the compiled program is using, and even the compiler that generated the machine code.
+
+<img src='storedProgramExample.png' title='Figure 2.7 Stored Program Example'>
+<br>
+<sup>Figure 2.7</sup>
+
 ### Vocab
 >**instruction set** *The vocabulary of commands understood by a given* architecture.
 
@@ -46,9 +57,27 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 >**most significant bit** *The leftmost bit in a MIPS word.*
 
+>**instruction format**  *A form of representation of an instruction composed of fields of binary numbers*
+
+>**machine language** *Binary representation used for communication with a computer system*
+
+>**hexadecimal** *Numbers in base 16*
+
+>**MIPS fields**
+> - op: Basic operation of the instruction, traditionally called the opcode
+> - rs: The first register source operand
+> - rt: The second register source operand
+> - rd: The register destination operand. It gets the result of the operation
+> - shamt: Shift amount.
+> - funct: Function. This field, often called the function code, selects the specific variant of the operation in the op field.
+
+>**opcode** *The field that denotes the operation and format of an instruction*
+
 ### Notes
 
 **Design Principals:**
 1. *Simplicity favors regularity.*
 2. *Smaller is faster.*
+3. *Good design demands good compromises.*
+
 
