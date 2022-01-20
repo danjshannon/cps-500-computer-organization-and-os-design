@@ -362,3 +362,100 @@ add $t0, $s1, $s2
 - **Design principle 4**: *Good design demands good compromises*
   - Different formats complicate decoding but allow 32-bit instructions uniformly
   - Keep formats as similar as possible
+
+## 2.6 Logical Operations
+([top](#week-2-Instructions))
+### Logical Operations
+- Instructions for bitwise manipulation
+
+|Operation|C|Java|MIPS|
+|:---:|:---:|:---:|:---:|
+|Shift left|<<|<<|sll|
+|Shift rigth|>>|>>>|srl|
+|Bitwise AND|&|&|and,andi|
+|Bitwise OR| \| | \| | or, ori|
+|Bitwise NOT| ~ | ~ | nor|
+
+- Useful for extracting and inserting groups of bits in a word.
+
+### SHIFT Operations
+- **shamt** how many positions to shift
+- **SLL** Shift Left Logical
+  - shift left and fill with 0 bits
+  - sll by i bits multiplies by 2i
+- **SRL** Shift Right Logical
+  - shift right and fill with 0 bits
+  - srl by i bits divides by [2i] (unsigned only)
+    - takes the floor (round down)
+
+**sll**
+> `...0x28...0101`
+> 0&times;2<sup>4</sup> + 0&times;2<sup>3</sup> + 1&times;2<sup>2</sup> + 0&times;2<sup>1</sup> + 1&times;2<sup>0</sup>
+> 0 + 0 + 4 + 0 + 1 = **5**
+> `00101 sll 00001`
+> `...0x28...1010`
+> 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 0&times;2<sup>0</sup>
+> 8 + 0 + 2 + 0 = **10**
+
+**srl**
+> `...0x28...0101`
+> `0101 srl 0001`
+> `0...0x28...010`
+> 0 + 1&times;2<sup>1</sup> + 0
+> 0 + 2 + 0 = **2**
+
+### AND Operations
+- useful to mask bits in a word
+  - select some bits, clear others to 0
+- a bit is 1 in the result if and only if it is 1 in both inputs
+
+```
+and $t0, $t1, $t2
+
+$t2 0000 0000 0000 0000 0000 1101 1100 0000
+$t1 0000 0000 0000 0000 0011 1100 0000 0000
+$t0 0000 0000 0000 0000 0000 1100 0000 0000
+```
+```
+0 and 0 = 0
+0 and 1 = 0
+1 and 0 = 0
+1 and 1 = 1
+```
+### OR Operations
+- useful to include bits in a word
+  - set some bits to 1, eave others unchanged
+
+```
+or $t1, $t2, $t3
+
+$t2 0000 0000 0000 0000 0000 1101 1100 0000
+$t1 0000 0000 0000 0000 0011 1100 0000 0000
+$t0 0000 0000 0000 0000 0011 1101 1100 0000
+```
+```
+0 or 0 = 0
+0 or 1 = 1
+1 or 0 = 1
+1 or 1 = 1
+```
+
+### NOT Operations
+- Useful to invert bits in a word
+  - change 0 to 1, and 1 to 0
+- MIPS has a NOR 3-operand instruction
+  - a NOR b == NOT (a or b)
+
+```
+nor $t0, $t1, $zero
+
+$zero 0000 0000 0000 0000 0000 0000 0000 0000
+$t1   0000 0000 0000 0000 0011 1100 0000 0000
+$t0   1111 1111 1111 1111 1100 0011 1111 1111
+```
+```
+0 nor 0 = 1
+0 nor 1 = 0
+1 nor 0 = 0
+1 nor 1 = 1
+```
