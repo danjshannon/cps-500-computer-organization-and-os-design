@@ -1,5 +1,5 @@
 # Week 2 Instructions
-
+- [Home](/README.md)
 - [2.1 Readings](#21-Readings)
 - [2.2 The Information Revolution](#22-Operations-and-operands)
 - [2.3 Program Performance](#23-memory-operands)
@@ -313,12 +313,12 @@ compliment: 10110100
 |6 bits|5 bits|5 bits|5 bits|5 bits|6 bits|
 
 - Instruction Fields
-  - op: operation code (opcode)
-  - rs: first source register number
-  - rt: second source register number
-  - rd: destination register number
-  - shamt: shift amount (00000 for now)
-  - funct: function code (extends opcode)
+  - **op**: *operation code (opcode)*
+  - **rs**: *first source register number*
+  - **rt**: *second source register number*
+  - **rd**: *destination register number*
+  - **shamt**: *shift amount (00000 for now)*
+  - **funct**: *function code (extends opcode)*
 
 ### R-Format Example
 
