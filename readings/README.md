@@ -74,11 +74,18 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 >**opcode** *The field that denotes the operation and format of an instruction*
 
+>**AND** *A logical bit-by-bit operation with two operands that calculates a 1 only if there is a 1 in both operands*
+
+>**OR** *A logical bit-by-bit operation with two operands that calculates a 1 if there is a 1 in either operand.*
+
+>**NOT** *A logical bit-by-bit operation with one operand that inverts the bits; that is, it replaces every 1 with a 0, and every 0 with a 1.*
+
+>**NOR** *A logical bit-by-bit operation with two operands that calculates the NOT of the OR of the two operands. That is, it calculates a 1 only if there is a 0 in both operands*
+
+
 ### Notes
 
 **Design Principals:**
 1. *Simplicity favors regularity.*
 2. *Smaller is faster.*
 3. *Good design demands good compromises.*
-
-

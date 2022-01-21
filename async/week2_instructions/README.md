@@ -425,7 +425,7 @@ $t0 0000 0000 0000 0000 0000 1100 0000 0000
 ```
 ### OR Operations
 - useful to include bits in a word
-  - set some bits to 1, eave others unchanged
+  - set some bits to 1, leave others unchanged
 
 ```
 or $t1, $t2, $t3
