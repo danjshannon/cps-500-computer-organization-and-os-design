@@ -99,10 +99,10 @@ Store register (word) to memory
 **X has to be a constant!!**
 
 ```C
-A[i]=x;
-y= A[x];
+A[i] = x;
+y = A[x];
 ```
-assume base address of a in in $s3 and x is in $s0 y is in 
+`assume base address of a in in $s3 and x is in $s0 y is in $s1`
 ```
 sll $t0, $s0, 2
 add $t0, $t0, $s3
@@ -131,8 +131,32 @@ int main(void){
 }
 ```
 
-```
-A[0]=x;
 
-sw $s3 0()
 ```
+1) A[0]=x;
+sw $s0 0($s3)
+
+
+2) z=A[5]+3;
+lw $t0 20($s3)
+addi $s2 $t0 3
+
+
+3) A[z]=x+y
+add $t0 $s0 $s1
+sll $t1 $s2 2       # 4*z
+add $t1 $t1 $s3     # @A + 4 * z
+sw $t0 0($t1)
+
+
+4) A[x]=z-(A[y]+3);
+sll $t0 $s1 2
+add $t0 $s3 $t0
+lw $t0 0($t0)       # A[y]
+
+addi $t0 $t0 3      # A[y]+3
+sub $t0 $s2 $t2     # t0 = z - A[y] + 3
+
+sll $t1 $s0 2
+add $t1 $t1 $s3
+sw $t0 0($t1)
