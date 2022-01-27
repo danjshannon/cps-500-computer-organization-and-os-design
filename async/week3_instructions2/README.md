@@ -1,4 +1,4 @@
-# Week 3 Instructions
+# Week 3 Instructions 2
 - [Home](/README.md)
 - [3.1 Readings](#31-Readings)
 - [3.2 Conditional Operations](#32-conditional-operations)
@@ -11,13 +11,13 @@
 - Any limits on label length
 
 ## 3.1 Readings
-([top](#week-3-Instructions))
+([top](#week-3-Instructions-2))
 
 *Patterson and Hennesy*
 [Chapter 2 | *Instructions: Language of the Computer*](/readings/README.md#Chapter-2--Instructions-Language-of-the-computer)
 
 ## 3.2 Conditional Operations
-([top](#week-3-Instructions))
+([top](#week-3-Instructions-2))
 
 
 ### Branch if (not) equal
@@ -171,7 +171,7 @@ sltu $t0, $s0, $s1 # unsigned
 - +4,294,976,295 &lt; +1 &rArr; $t0 = 0
 
 ## 3.3 Procedures
-([top](#week-3-Instructions))
+([top](#week-3-Instructions-2))
 
 ### Procedure Calling
 - Steps
@@ -276,7 +276,7 @@ false:                       # label for returning y.
 ```
 
 ## 3.4 Translation And Startup
-([top](#week-3-Instructions))
+([top](#week-3-Instructions-2))
 
 <img src="ProgramCompilation.png">
 
@@ -334,7 +334,7 @@ Only link/load library procedure when it is called
 - Dynamically mapped code
 
 ## 3.5 Sorting Example
-([top](#week-3-Instructions))
+([top](#week-3-Instructions-2))
 
 ### Sort Example
 - Illustrates use of assembly instructions for a C bubble sort function
@@ -348,9 +348,9 @@ void swap(int v[], int k){
   v[k+1]=temp;
 }
 ```
-- v: `$0`
-- k: `$a1`
-- temp: `$t0`
+- `$0` v
+- `$a1` k
+- `$t0` temp
 
 ### The Procedure Swap
 ```

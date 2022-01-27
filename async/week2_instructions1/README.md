@@ -1,4 +1,4 @@
-# Week 2 Instructions
+# Week 2 Instructions 1
 - [Home](/README.md)
 - [2.1 Readings](#21-Readings)
 - [2.2 The Information Revolution](#22-Operations-and-operands)
