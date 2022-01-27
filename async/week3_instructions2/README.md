@@ -388,7 +388,7 @@ void sort(int v[], int n){
 - `$s1` j
 - `$s2` v
 - `$s3` n
-```assembly
+```mips
 ##### move parameters #####
 move $s2, $a0                       # copy parameters $a0 into $s2 (save $a0)
 move $s3, $a1                       # copy parameter $a1 into #s3 (save $a1)
