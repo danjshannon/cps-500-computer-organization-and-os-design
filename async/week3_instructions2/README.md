@@ -1,7 +1,14 @@
 # Week 3 Instructions
 - [Home](/README.md)
 - [3.1 Readings](#31-Readings)
-- [2.2 The Information Revolution](#22-Operations-and-operands)
+- [3.2 Conditional Operations](#32-conditional-operations)
+- [3.3 Procedures](#33-procedures)
+- [3.4 Translation and Startup](#34-translation-and-startup)
+- [3.5 Sorting Example](#35-sorting-example)
+
+## Questions
+- Are linkers similar to linked lists? The slide on lazy linking.
+- Any limits on label length
 
 ## 3.1 Readings
 ([top](#week-3-Instructions))
@@ -162,3 +169,287 @@ slt $t0, $s0, $s1 # signed
 sltu $t0, $s0, $s1 # unsigned
 ```
 - +4,294,976,295 &lt; +1 &rArr; $t0 = 0
+
+## 3.3 Procedures
+([top](#week-3-Instructions))
+
+### Procedure Calling
+- Steps
+  1. Place parameters in registers
+  2. Transfer control to procedure
+  3. Acquire storage for procedure
+  4. Perform procedure's operations
+  5. Place result in register for caller
+  6. Return to place of call
+
+### Register Usage
+|Name|Register #|Usage|Reserved on call?|
+|:---|:---|:---|:---|
+|`$zero`|0|Constant 0|n.a.|
+|`$v0-$v1`|2-3|Value results for expression evaluation|no|
+|`$a0-$a3`|4-7|Arguments|no|
+|`$t0-$t7`|8-15|Temporaries|no|
+|`$s0-$s7`|16-23|Saved|yes|
+|`$t8-$t9`|24-25|More temporaries|no|
+|`$gp`|28|Global pointer|yes|
+|`$sp`|29|Stack pointer|yes|
+|`$fp`|30|Frame pointer|yes|
+|`$ra`|31|Return address|yes|
+
+### Procedure Call Instructions
+- Procedure call: jump-and-link
+  - `jal ProcedureLabel`
+  - address of following instruction put in `$ra`
+  - jumps to target address
+- Procedure return: jump-register
+  - `jr $ra`
+  - copies `$ra` to program counter
+  - can alos be used for computed jumps
+  - e.g. for case/switch statements
+
+#### Question
+> Which of the following code snippets demonstrates how to make a function call,
+assuming that x is in `$s0`, a is in `$s1` and b is in `$s2`?
+`int x = min(a, b);`
+
+```
+addi $a0, $s1, 0 # Set the first parameter to a
+addi $a1, $s2, 0 # Set the second parameter to b
+jal min # Call the function min
+addi $s0, $v0, 0 # Store the result into the v0 register.
+```
+
+### Leaf Procedure Example [1]
+C code:
+```C
+int leaf_example(int g, int h , int i, int j){
+  int f;
+  f = (g+h) - (i+j);
+  return f;
+}
+```
+- arguments g,...,j in `$a0`,...,`$a3`
+- f in `$s0` (hence, need to save `$s0` on stack)
+- Result in `$v0`
+
+### Leaf Procedure Example [2]
+Mips code:
+```
+leaf example:          # prcedure label
+
+  addi $sp, $sp, -4    #
+  sw $s0, 0($sp)       # save $s0 on stack
+
+  add $t0, $a0, $a1    #
+  add $t1, $a2, $a3    #
+  sub $s0, $t0, $t1    # procedure body
+
+  add $v0, $s0, $zero  # result
+
+  lw $s0, 0($sp)       # 
+  addi $sp, $sp, 4     # restor $s0
+
+  jr $ra               # return
+```
+- *everything will be in the same state at the end, except `$v0` will have the result value of the procedure*
+- Stack grows "down" and heap grows "up" with size
+
+
+#### Question
+> Which of the answers captures the semantics of the following C function:
+> ```
+> int min (int x, int y) {
+>   if (x < y) return x;
+>   return y;
+> }
+> ```
+
+```
+min:             # function label.
+  slt $t0, $a0, $a1          # t0 = x < y.
+  beq $t0, $0, false         # t0 = 0 -> x >= y (return y).
+  addi $v0, $a0, 0           # return x.
+  jr $ra                     # return to caller
+false:                       # label for returning y.
+  addi $v0, $a1, 0           # set return value to y.
+  jr $ra                     # return to caller
+```
+
+## 3.4 Translation And Startup
+([top](#week-3-Instructions))
+
+<img src="ProgramCompilation.png">
+
+### Assembler Pseduo-Instructions
+- most assembler instructions represent machine instructions one-to-one
+- pseduo-instructions: figments of the assember's imagination
+
+```
+move $t0, $t1   -> add $t0, $zero, $t1
+blt $t0, $t1, L -> slt $at, $t0, $t1 bne $at $zero, L
+```
+- `$at` (register 1): assembler temporary
+
+### Producing an Object Module
+- Assembler (or compiler) translates program into machine instructions
+- Provides information for building a complete program from pieces
+  - **Header**: described contents of object module
+  - **Text Segment**: translated instructions
+  - **Static Data Segment**: data allocated for the life of the program
+  - **Relocation information**: for contents that depend on absolute location of loaded program
+  - **Symbol Table**: global definitions and external refs
+  - **Debug Information**: for associating with source code
+
+### Linking Object Modules
+- Produces an executabe image
+  - Merge segments
+  - Resolve labels (determine their addresses)
+  - Patch location-dependent and external references
+- Could leave locatoin dependencies for fixing by relocating loader
+  - But with virtual memory, no need to do this
+  - Program can be loaded into absolute location in virtual memory space
+
+### Loading a Program
+Load from image file on disk into memory
+1. Read header to determine segment size
+2. Create virtual address space
+3. Copy text and initialized data into memory
+4. Or set page table entries so they can be faulted (copied) in
+5. Set up arguments on stack
+6. Initialize registers (including `$sp`, `$fp`, `$gp`) 
+7. Jump to startup routine
+    - copies arguments to `$a0`, ... and calls main
+    - When main returns, do exit syscall
+  
+### Dynamic Linking
+Only link/load library procedure when it is called
+- Requires procedure code to be relocatable
+- Avoids image bload caused by static linking of all (transitively) referenced libraries
+- Automatically picks up new library versions
+
+### Lazy Linking
+- Indirection Table
+- Stub: Loads routine ID, jump
+- Linker/loader code
+- Dynamically mapped code
+
+## 3.5 Sorting Example
+([top](#week-3-Instructions))
+
+### Sort Example
+- Illustrates use of assembly instructions for a C bubble sort function
+- swap procedure (leaf)
+
+```C
+void swap(int v[], int k){
+  int temp;
+  temp = v[k];
+  v[k]=v[k+1];
+  v[k+1]=temp;
+}
+```
+- v: `$0`
+- k: `$a1`
+- temp: `$t0`
+
+### The Procedure Swap
+```
+##### Procedure Body#####
+swap:
+      sll $r1, $a1, 2    # reg $t1 = k * 4
+      add $t1, $a0. $t1  # reg $t1 = v + (k * 4)
+                         # reg $t1 has the address of v[k]
+      lw  $t0. 0($t1)    # reg $t0 (temp) = v[k]
+      lw  $t2, 4($t1)    # reg $t2 = v[k+1]
+                         # refers to next element of v
+      sw  $t2, 0($t1)    # v[k] = reg $t2
+      sw  $t0, 4($t1)    # v[k+1] = reg $t0 (temp)
+
+##### Procedure Return #####
+
+      jr  $ra            # return to calling routine
+```
+
+### Sort Procedure
+```C
+void sort(int v[], int n){
+  int i,j;
+  for(i = 0; i < n; i+=1){
+    for(j = i-1; j >= 0 && v[j] > v[j+1]; j-=1){
+      swap(v,j);
+    }
+  }
+}
+```
+
+### Procedure Body
+
+- `$s0` i
+- `$s1` j
+- `$s2` v
+- `$s3` n
+```
+##### move parameters #####
+move $s2, $a0                       # copy parameters $a0 into $s2 (save $a0)
+move $s3, $a1                       # copy parameter $a1 into #s3 (save $a1)
+
+##### outer loop #####
+######################
+move $s0, $zero                     # i=0
+for1tst: lst $t0, $s0, $s3          # reg $t0=0 if $so
+         beq $t0, $zero, exit1      # got to exit1 if $s0<$s3 (i<n)
+
+##### inner loop #####
+######################
+addi $s1, $s0, -1                   # j=i-1
+for2tst:  slti $t0, $s1,0           # reg $t0=1 if $sl<0 (j<0)
+          bne  $t0, $zero, exit2    # go to exit2 if $s<0 (j<0)
+          sll  $t1, $s1, 2          # reg $t1 = j*4
+          add  $t2, $s2, $t1        # reg $t2=v+(j*4)
+          lw   $t3, 0($t2)          # reg $t3=v[j]
+          lw   $t4, 4($t2)          # reg $t4=v[j+1]
+          slt  $t0, $t4, $t3        # reg $t0=0 if $t4<$t3
+          beq  $t0, $zero, exit2    # go to exit 2 if $t4<$t3
+
+##### pass parameters to call #####
+###################################
+move $a0, $s2                       # 1st parameter of swap is v (old $a0)
+move $a1, $s1                       # 2nd parameter of swap is j
+jal  swap                           # swap code shown in figure 2.25
+
+##### inner loop #####
+######################
+addi $s1, $s1 -1                     # j-=1
+j    for2tst                         # jump to test of inner loop
+
+##### outer loop #####
+######################
+exit2: addi $s0, $s0, 1              # i+=1
+       j for1tst                     # jump to test of outer loop
+```
+
+### Sort Entry and Exit
+```
+##### saving registers #####
+############################
+sort: addi $sp, $sp, -20              # make room on stack for 5 registers
+      sw   $ra, 16($sp)               # save $ra on stack
+      sw   $s3, 12($sp)               # save $s3 on stack
+      sw   $s2, 8($sp)                # save $s2 on stack
+      sw   $s1, 4($sp)                # save $s1 on stack
+      sw   $s0, 0($sp)                # save $s0 on stack
+
+
+##### restoring registers #####
+###############################
+exit1: lw   $s0, 0($sp)               # restore $s0 from stack
+       lw   $s1, 4($sp)               # restore $s1 from stack
+       lw   $s2, 8($sp)               # restore $s2 from stack
+       lw   $s3, 12($sp)              # restore $s3 from stack
+       lw   $s4, 16($sp)              # restore $ra from stack
+       addi $sp, $sp, 20              # restore stack pointer
+
+##### procedure return #####
+############################
+jr $ra                                # return to calling routine
+```

@@ -55,6 +55,22 @@ sltu $t0, $s1, $t2 # $t0 = 0 if $s1>=length or $s1<0
 beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 ```
 
+#### MIPS Register Convention
+|Name|Register #|Usage|Reserved on call?|
+|:---|:---|:---|:---|
+|`$zero`|0|Constant 0|n.a.|
+|`$v0-$v1`|2-3|Value results for expression evaluation|no|
+|`$a0-$a3`|4-7|Arguments|no|
+|`$t0-$t7`|8-15|Temporaries|no|
+|`$s0-$s7`|16-23|Saved|yes|
+|`$t8-$t9`|24-25|More temporaries|no|
+|`$gp`|28|Global pointer|yes|
+|`$sp`|29|Stack pointer|yes|
+|`$fp`|30|Frame pointer|yes|
+|`$ra`|31|Return address|yes|
+
+
+
 ## Vocab
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 #### instruction set
@@ -160,4 +176,16 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 
 #### pop
 > *Remove element from stack*
+
+#### global pointer
+> *The register that is reserved to point to the static area.*
+
+#### procedure frame
+> *Also called **activation record**. The segment of the stack containing a procedure's saved registers and local variables.*
+
+#### frame pointer
+> *A value denoting the location of the saved registers and loal variables for a given procedure*
+
+#### text segment
+> *The segment of a UNIX object file that contains the machine language code for routines in the source file*
 
