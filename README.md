@@ -1,6 +1,6 @@
-# CPS 500 Computer Organizatoin and Oprating System Design | *Syracuse University*
+# CPS 500 Computer Organizatoin and Operating System Design | *Syracuse University*
 ## cps-500-computer-organization-and-os-design
-### Computer Organization and Design Table of Contents
+### Computer Organization and OS Design Table of Contents
 
 ### Async Table of Contents
 - [Readings](/readings/README.md#computer-organization-and-design--the-hardwaresoftware-interface)
