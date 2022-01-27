@@ -40,17 +40,17 @@ else f = g - h;
 ```
 
 - Compiled MIPS code:
-```
-  bne $s3, $s4, Else
-  add $s0, $s1, $s2
-  j Exit
+```assembly
+bne $s3, $s4, Else
+add $s0, $s1, $s2
+j Exit
 Else: sub $s0, $s1, $s2 # Else is serving as a label
 Exit: ... # Exit is label
 ```
 <img src="ifFlow.png">
 
 Above compiled the `if` statement into `bne`. What if it were beq?
-```
+```assembly
   beq $s3, $s4, If
   sub $s0, $s1, $s2 # swap if and else labels
   j Exit
@@ -85,7 +85,7 @@ while (save[i] == k) i += 1;
 // i in $s3, k in $s5, address of save in $s6
 ```
 - Compiled MIPS code
-```
+```assembly
 Loop: sll $t1, $s3, 2     # multiple 2*2 = 4, 
       add $t1, $t1, $s6   # position of i (the index i of save)
       lw $t0, 0($t1)      # copying out of array into register $t0
@@ -103,7 +103,7 @@ while (i > 0) {
 }
 ```
 
-```
+```assembly
 loop:            # A label to jump back to. 
 slt $t0, $0, $s0 # $t0 = 1 IFF 0 < x.
 beq $t0, $0, end # $t0 = 0 IFF 0 >= x (so exit loop).
@@ -234,7 +234,7 @@ int leaf_example(int g, int h , int i, int j){
 
 ### Leaf Procedure Example [2]
 Mips code:
-```
+```assembly
 leaf example:          # prcedure label
 
   addi $sp, $sp, -4    #
@@ -264,7 +264,7 @@ leaf example:          # prcedure label
 > }
 > ```
 
-```
+```assembly
 min:             # function label.
   slt $t0, $a0, $a1          # t0 = x < y.
   beq $t0, $0, false         # t0 = 0 -> x >= y (return y).
@@ -284,7 +284,7 @@ false:                       # label for returning y.
 - most assembler instructions represent machine instructions one-to-one
 - pseduo-instructions: figments of the assember's imagination
 
-```
+```assembly
 move $t0, $t1   -> add $t0, $zero, $t1
 blt $t0, $t1, L -> slt $at, $t0, $t1 bne $at $zero, L
 ```
@@ -353,7 +353,7 @@ void swap(int v[], int k){
 - `$t0` temp
 
 ### The Procedure Swap
-```
+```assembly
 ##### Procedure Body#####
 swap:
       sll $r1, $a1, 2    # reg $t1 = k * 4
@@ -388,7 +388,7 @@ void sort(int v[], int n){
 - `$s1` j
 - `$s2` v
 - `$s3` n
-```
+```assembly
 ##### move parameters #####
 move $s2, $a0                       # copy parameters $a0 into $s2 (save $a0)
 move $s3, $a1                       # copy parameter $a1 into #s3 (save $a1)
