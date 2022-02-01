@@ -189,3 +189,8 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 #### text segment
 > *The segment of a UNIX object file that contains the machine language code for routines in the source file*
 
+#### PC-relative addressing (program counter)
+> *An addressin regime in which the address is the sum of the program counter (PC) and a constant in the instruction.*
+
+#### addressing mode
+> *one of several addressing regimes delimited by their varied use of operands and/or addresses.*
