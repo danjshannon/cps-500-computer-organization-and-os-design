@@ -1,10 +1,14 @@
 # Week 4 Arithmetic for Computers
+- [Home](/README.md)
 - [4.1 Readings](#41-readings)
 - [4.2 Addition and Subtraction](#42-addition-and-subtraction)
 - [4.3 Multiplication](#43-multiplication)
 
 ## 4.1 Readings
 ([top](#week-4-arithmetic-for-computers))
+
+*Patterson and Hennesy*
+[Chapter 3 | *Arithmetic for Computers*](/readings/README.md#Chapter-3--arithmetic-for-computers)
 
 ## 4.2 Addition and Subtraction
 ([top](#week-4-arithmetic-for-computers))
