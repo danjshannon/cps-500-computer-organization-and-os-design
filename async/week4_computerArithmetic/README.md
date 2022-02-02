@@ -120,7 +120,11 @@
 
 ### Performance
 - if each step in the flow diagram takes one clock cycle, multipling two 32-bit numbers could be 100 clock cycles
-<img src='ParallelMultiplication.png'/>
+
+> <img src='ParallelMultiplication.png'/>
+>
+> division hardware
+
 - perform add/shift in parallel, one clock cycle per bit.
 
 ### Mutiple Adders
@@ -162,9 +166,13 @@
 ### Division Algorithm
 - The remainder register is initialized with the dividend
 
-<img src='DivisionAlgorithm.png'/>
+> <img src='DivisionAlgorithm.png'/>
+>
+> division algorithm
 
-<img src='Division.png'/>
+> <img src='Division.png'/>
+>
+> division hardware
 
 ### Improved Division
 - Shift the operands and quotient simultaneously

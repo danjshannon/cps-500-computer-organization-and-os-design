@@ -1,6 +1,8 @@
 ## Vocab
 - [Home](/README.md)
 
+### Chapter 2
+
 #### instruction set
 > *The vocabulary of commands understood by a given architecture.*
 
@@ -121,4 +123,29 @@
 > *An addressin regime in which the address is the sum of the program counter (PC) and a constant in the instruction.*
 
 #### addressing mode
-> *one of several addressing regimes delimited by their varied use of operands and/or addresses.*
+> *One of several addressing regimes delimited by their varied use of operands and/or addresses.*
+
+
+
+### Chapter 3
+#### Arithmetic Logic Unit (ALU)
+> *Hardware that performs addition, subtraction, and usually logical operations such as AND and OR*
+
+#### exception
+> *Also caled **interupt**. An unscheduled event that disrupts program execution; used to detect overflow.*
+
+#### interrupt
+> *An exception that comes from outside of the processor. (Some architectures use the term interrupt for all exceptions.)
+
+#### dividend
+> *A number being divided*
+
+#### divisor
+> *a number that the dividend is divided by*
+
+#### quotient
+> *the primary result of a division; a number that when multiplied by the divisor and added to the raminder produces the dividend.*
+
+#### remainder
+> *the secondary result of a division; a number that when added to the product of the quotient and the divisor produces the dividend.*
+

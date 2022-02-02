@@ -4,6 +4,7 @@
 - [Vocab](#vocab)
 - [Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
 - [Chapter 2 | *Instructions: Language of the computer*](#Chapter-2--Instructions-Language-of-the-computer)
+- [Chapter 3 | *Arithmetic for Computers*](#Chapter-3--arithmetic-for-computers)
 
 
 # Chapter 1 | *Computer Abstractions and Technology*
@@ -70,3 +71,6 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 |`$ra`|31|Return address|yes|
 
 # Chapter 3 | *Arithmetic for Computers*
+([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
+
+`dividend = quotient X divisor + Remainder`
