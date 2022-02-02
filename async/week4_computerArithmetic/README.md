@@ -3,6 +3,7 @@
 - [4.1 Readings](#41-readings)
 - [4.2 Addition and Subtraction](#42-addition-and-subtraction)
 - [4.3 Multiplication](#43-multiplication)
+- [4.4 Division](#44-division)
 
 ## 4.1 Readings
 ([top](#week-4-arithmetic-for-computers))
@@ -138,3 +139,51 @@
     - can test HI value to see if product overflows 32 bits
   - `mul rd, rs, rt`
     - least-significant 32 bits of product &rarr; rd
+
+## 4.4 Division
+([top](#week-4-arithmetic-for-computers))
+
+### Division
+- Check for 0 divisor
+- Long-division approach
+  - If divisor &le; dividend bits
+    - 1 bit in quotient, subtract
+  - Else
+    - 0 bit in quotient, bring down next dividend bit
+- Restoring division
+  - Do the subtract, and if remainder goes < 0, add divisor back
+- Signed division
+  - Divide using absolute values
+  - Adjust sign of quotient and remainder as required
+- `divisor / dividend = quotient & remainder`
+
+### Division Algorithm
+- The remainder register is initialized with the dividend
+
+<img src='DivisionAlgorithm.png'/>
+
+<img src='Division.png'/>
+
+### Improved Division
+- Shift the operands and quotient simultaneously
+- Looks similar to multiplication
+- Can use same hardware for both!
+
+<img src='ImprovedDivision.png'/>
+
+### Faster Division?
+- Can't use parallel hardware as in multiplier
+  - subtraction is conditional on sign of remainder
+- Faster dividers (e.g. SRT division) generate multiple quotient bits per step
+  - still require multiple steps
+
+### MIPFS Division
+- USE HI/LO registers for result
+  - HI: 32-bit remainder
+  - LO: 32-bit quotient
+- Instructions
+  - `div rs, rt`
+  - `divu rs, rt`
+  - no overflow or divide-by-0 checking
+    - software must perform checks if required
+  - use `mfhi`, `mflo` to access result
