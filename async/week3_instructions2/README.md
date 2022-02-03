@@ -1,5 +1,5 @@
 # Week 3 Instructions 2
-- [Home](/README.md)
+- [Home](/README.md#async-table-of-contents)
 - [3.1 Readings](#31-Readings)
 - [3.2 Conditional Operations](#32-conditional-operations)
 - [3.3 Procedures](#33-procedures)

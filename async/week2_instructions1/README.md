@@ -1,5 +1,5 @@
 # Week 2 Instructions 1
-- [Home](/README.md)
+- [Home](/README.md#async-table-of-contents)
 - [2.1 Readings](#21-Readings)
 - [2.2 The Information Revolution](#22-Operations-and-operands)
 - [2.3 Program Performance](#23-memory-operands)

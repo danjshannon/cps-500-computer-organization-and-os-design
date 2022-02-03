@@ -1,6 +1,6 @@
 # Computer Organization and Design | *The Hardware/Software Interface*
 ## Patterson and Hennessy
-- [Home](/README.md)
+- [Home](/README.md#async-table-of-contents)
 - [Vocab](#vocab)
 - [Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
 - [Chapter 2 | *Instructions: Language of the computer*](#Chapter-2--Instructions-Language-of-the-computer)

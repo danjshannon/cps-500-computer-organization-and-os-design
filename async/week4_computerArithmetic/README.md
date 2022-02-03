@@ -1,5 +1,5 @@
 # Week 4 Arithmetic for Computers
-- [Home](/README.md)
+- [Home](/README.md#async-table-of-contents)
 - [4.1 Readings](#41-readings)
 - [4.2 Addition and Subtraction](#42-addition-and-subtraction)
 - [4.3 Multiplication](#43-multiplication)

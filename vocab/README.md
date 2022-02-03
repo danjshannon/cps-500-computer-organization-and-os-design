@@ -1,5 +1,5 @@
 ## Vocab
-- [Home](/README.md)
+- [Home](/README.md#async-table-of-contents)
 
 ### Chapter 2
 
