@@ -4,6 +4,7 @@
 - [4.2 Addition and Subtraction](#42-addition-and-subtraction)
 - [4.3 Multiplication](#43-multiplication)
 - [4.4 Division](#44-division)
+- [4.5 Floating Point](#45-floating-point)
 
 ## 4.1 Readings
 ([top](#week-4-arithmetic-for-computers))
@@ -197,3 +198,75 @@
   - no overflow or divide-by-0 checking
     - software must perform checks if required
   - use `mfhi`, `mflo` to access result
+
+
+## 4.5 Floating Point
+([top](#week-4-arithmetic-for-computers))
+
+### Real Numbers
+- Fractional Numbers
+  - 3.14159265... (&pi;)
+  - 2.71727... (e)
+- Scientific Notation
+  - -2.34&times;01<sup>56</sup>
+- types float and double in C
+
+### Floating-point standard
+- Definied by IEE std 754-1985
+- Develped in response to divergence of representations
+  - portability issues for scientific code
+- now almost universally adopted
+- Two representations
+  - Single precision (32-bit)
+  - Double precision (64-bit)
+
+### IEEE Floating-Point Standard
+|S (sign bit)|Exponent|Fraction|
+|-|-|-|
+|single|8 bits|23 bits|
+|double|11 bits|52 bits|
+
+>  x=(-1)<sup>S</sup> &times; (1 + fraction) &times; 2<sup>(exponent - bias)</sup>
+
+- **S**: sign bit (0 &rArr; non-negative, 1 &rArr; negative)
+- Normalize significand: 1.0 &le; |significand| &lt; 2.0
+  - always has a leading pre-binary-point 1 bit, so no need to represent it explicitly (hidden bit)
+  - significand is fraction with the "1" restored
+- Exponent: excess representation: actual exponent + bais
+  - Ensures exponent is unsigned
+  - single: bias = 127;
+  - double: bias = 1023;
+
+### Single-Prescision Range
+- Exponents 00000000 and 11111111 reserved
+- smallest value
+  - exponent: 00000001
+    - &rArr; actual exponent = `1 - 127 = -126`
+  - fraction: 000..00 &rArr; significand = 1.0
+  - &#8723;2.0 &times; 2<sub>-126</sub> &asymp; &#8723;1.2 &times; 10<sub>-38</sub>
+- largest value
+  - exponent: 11111110
+    - &rArr; actual exponent = `254 - 127 = +127`
+  - fraction: 111..11 &rArr; significand &asymp; 2.0
+  - &#8723;2.0 &times; 2<sub>+127</sub> &asymp; &#8723;3.4 &times; 10<sub>+38</sub>
+
+### Double-Precision Range
+- Exponents 00000000 and 11111111 reserved
+- smallest value
+  - exponent: 00000000001
+    - &rArr; actual exponent = `1 - 1023 = -1022`
+  - fraction: 000..00 &rArr; significand = 1.0
+  - &#8723;2.0 &times; 2<sub>-1022</sub> &asymp; &#8723;2.2 &times; 10<sub>-308</sub>
+- largest value
+  - exponent: 11111110
+    - &rArr; actual exponent = `254 - 127 = +127`
+  - fraction: 111..11 &rArr; significand &asymp; 2.0
+  - &#8723;2.0 &times; 2<sub>+1023</sub> &asymp; &#8723;1.8 &times; 10<sub>+308</sub>
+
+### Floating-Point Precision
+- Relative precision
+- All fraction bits are significant
+- single: approximately 2<sup>-23</sup>
+  - equivalent to 23 &times; log<sub>10</sub>2 &asymp; 23 &times; 0.3 &asymp; 6 decimal digits of precision
+- double: approximately 2<sup>-52</sup>
+  - equivalent to 52 &times; log<sub>10</sub>2 &asymp; 52 &times; 0.3 = 16 decimal digits of precision

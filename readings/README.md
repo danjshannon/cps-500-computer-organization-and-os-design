@@ -74,3 +74,6 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 
 `dividend = quotient X divisor + Remainder`
+
+## Floating Point Addition
+<img src="FloatingPointAddition.png"/>

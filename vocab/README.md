@@ -149,3 +149,29 @@
 #### remainder
 > *the secondary result of a division; a number that when added to the product of the quotient and the divisor produces the dividend.*
 
+#### scientific notation
+> *A notation that renders numbers with a single digit to the left of the decimal point.*
+
+#### normalized
+> *a number in floating-point notation that has no leading 0s*
+
+#### floating point
+> *computer arithmetic that represents numbers in which the binary point is not fixed*
+
+#### fraction
+> *the value, generally between 0 and 1, placed in the fraction field. The fraction is also called the mantissa*
+
+#### exponent
+> *in the numerical representation system of floatin-point arithmetic, the value that is placed in the exponent field.*
+
+#### overflow (floating-point)
+> *a situation in which a positive exponent becomes too large to fit in the exponent field*
+
+#### underflow (floating-point)
+> *a situatoin win which a negative exponnent becomes too large to fit in the exponent field*
+
+#### double precision
+> *a floating-point value represented in two 32-bit words*
+
+#### single precision 
+> *a floating-point value represented in one 32-bit word*
