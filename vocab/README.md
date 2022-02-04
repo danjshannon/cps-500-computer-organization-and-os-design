@@ -1,7 +1,7 @@
-## Vocab
+# Vocab
 - [Home](/README.md#async-table-of-contents)
 
-### Chapter 2
+## Chapter 2
 
 #### instruction set
 > *The vocabulary of commands understood by a given architecture.*
@@ -125,9 +125,25 @@
 #### addressing mode
 > *One of several addressing regimes delimited by their varied use of operands and/or addresses.*
 
+#### data race
+> *Two memory accessses form a data race if they are from different threads to the same location, at least one is write, and they occure one after another*
 
+#### assembler language
+> *A symbolic language that can be translated into binary machine language*
 
-### Chapter 3
+#### pseudoinstructoin
+> *a common variation of assembly language instruction often treated as if it were an instruction in its own right*
+
+#### symbol table
+> *a table that matches names of labels to the addresses of the memory words that instructions occupy*
+
+#### linker
+> *also called **link editor**. A systems program that combines indepenetly assembled machine language programs and resolves all undefined labels into an executable file.*
+
+#### executable file
+> *A functional program in the format of an object file that contains no unresolved references. It can contain symbol tables and debugging information. A "stripped executable" does not contain that information. Relocation information may be included for the loader*
+
+## Chapter 3
 #### Arithmetic Logic Unit (ALU)
 > *Hardware that performs addition, subtraction, and usually logical operations such as AND and OR*
 

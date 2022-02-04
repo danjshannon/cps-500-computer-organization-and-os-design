@@ -70,6 +70,18 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 |`$fp`|30|Frame pointer|yes|
 |`$ra`|31|Return address|yes|
 
+
+#### Object File For Unix Systems
+|object file|description|
+|:-|:-|
+|object file header|describes the size and position of the other pieces of the object file|
+|text segment|contains machine language code|
+|static data segment|contains data allocated for the life of the program|
+|relocation information| identifies instructions and data words that depend on absolute addresses when the program is loaded into memory.|
+|symbol table|contains the remaining labels that are not defined, such as external references|
+|debugging information|contains a concise description of how the modules were compiled so that a debugger can associate machine instructions with C source files and make data structures readable|
+
+
 # Chapter 3 | *Arithmetic for Computers*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 

@@ -5,6 +5,7 @@
 - [4.3 Multiplication](#43-multiplication)
 - [4.4 Division](#44-division)
 - [4.5 Floating Point](#45-floating-point)
+- [4.6 Common Fallacies](#46-common-fallacies)
 
 ## 4.1 Readings
 ([top](#week-4-arithmetic-for-computers))
@@ -270,3 +271,48 @@
   - equivalent to 23 &times; log<sub>10</sub>2 &asymp; 23 &times; 0.3 &asymp; 6 decimal digits of precision
 - double: approximately 2<sup>-52</sup>
   - equivalent to 52 &times; log<sub>10</sub>2 &asymp; 52 &times; 0.3 = 16 decimal digits of precision
+
+## 4.6 Common Fallacies
+([top](#week-4-arithmetic-for-computers))
+
+### Left Shift =  Multuple by 2
+- A left shift instruction can replace an integer multiple ny the power of 2.
+- Binary number
+- > C = (x<sub>3</sub>2<sup>3</sup>) + (x<sub>2</sub>2<sup>2</sup>) + (x<sub>1</sub>2<sup>1</sup>) + (x<sub>0</sub>2<sup>0</sup>)
+
+- left shift of C:
+- > (x<sub>3</sub>2<sup>4</sup>) + (x<sub>2</sub>2<sup>3</sup>) + (x<sub>1</sub>2<sup>0</sup>) + (0&times;2<sup>0</sup>)
+
+- 00000110<sub>2</sub> = 6<sub>10</sub>
+
+- left shift (`6 << 1` in C) = 00001100<sub>2</sub> = 12<sub>10</sub>
+
+### Is Right Shift Divide by 2?
+- Divide -5<sub>10</sub> by 4<sub>10</sub> (quotient should be -1<sub>10</sub>)
+- -5<sub>10</sub> = 1111 1111 1111 1111 1111 1111 1111 1011<sub>2</sub>
+- Right shift two bits to get 4<sub>10</sub>
+- 1,073,741,882<sub>10</sub> = 00011 1111 1111 1111 1111 1111 1111 1110<sub>2</sub>
+- What if we extend the sign bit:
+- -2<sub>10</sub> = 1111 1111 1111 1111 1111 1111 1111 1110<sub>2</sub>
+- Not true fro **signed** integers.
+
+### Floating-Point Addition is Not Associative
+- Associative rule: `c + (a + b) = (c + a) + b`
+- Associative rule *does* hold for two's complement sequences, even if overflow occurs
+- c = -1.5&times;10<sup>38</sup>
+- a =  1.5&times;10<sup>38</sup>
+- b = 1.0
+
+> c + (a + b) = -1.5&times;10<sup>38</sup> + (1.5&times;10<sup>38</sup> + 1.0)
+>             = -1.5&times;10<sup>38</sup> + 1.5&times;10<sup>38</sup>
+>             = 0
+
+> (c + a) + b = (-1.5&times;10<sup>38</sup> + 1.5&times;10<sup>38</sup>) + 1.0
+> 0.0 + 1.0
+> 1.0
+
+### Parallel Foating-Point Calculations
+- We just saw that floating-point arithmetic is not associative.
+- what impact might this cause when running the same code multiple times in parallel?
+- Parallel code is not strictly ordered; the exact sequence can vary run over run even though the code is the same.
+- Results in different outputs.
