@@ -8,13 +8,13 @@
 - [2.6 Logical Operations](#26-logical-operations)
 
 ## 2.1 Readings
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 
 *Patterson and Hennesy*
 [Chapter 2 | *Instructions: Language of the Computer*](/readings/README.md#Chapter-2--Instructions-Language-of-the-computer)
 
 ## 2.2 Operations and Operands
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 
 ### Instruction Set
 - The repertoire of instructions of a compiler
@@ -82,7 +82,7 @@ sub $s0, $t0, $t1
 ```
 
 ## 2.3 Memory Operands
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 
 
 ### Memory Operands
@@ -183,7 +183,7 @@ add $s0, $s0, $t0
 ```
 
 ## 2.4 Integer Representations
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 
 ### Unsigned Binary Integers
 - Given an n-bit number
@@ -269,7 +269,7 @@ compliment: 10110100
 ```
 
 ## 2.5 Instruction Representation
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 
 - Instructions are encoded in binary
   - called machine code
@@ -365,7 +365,7 @@ add $t0, $s1, $s2
   - Keep formats as similar as possible
 
 ## 2.6 Logical Operations
-([top](#week-2-Instructions))
+([top](#week-2-Instructions-1))
 ### Logical Operations
 - Instructions for bitwise manipulation
 
