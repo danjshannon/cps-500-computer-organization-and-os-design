@@ -9,7 +9,7 @@
 *Patterson and Hennesy*
 [Chapter 4 | *The Processor*](/readings/README.md#Chapter-4--the-processor)
 
-## 5.2 The Processory
+## 5.2 The Processor
 ([top](#week-5-the-processor))
 
 ### MIPS Subset
