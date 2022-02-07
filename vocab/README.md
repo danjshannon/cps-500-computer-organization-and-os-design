@@ -144,8 +144,8 @@
 > *A functional program in the format of an object file that contains no unresolved references. It can contain symbol tables and debugging information. A "stripped executable" does not contain that information. Relocation information may be included for the loader*
 
 ## Chapter 3
-#### Arithmetic Logic Unit (ALU)
-> *Hardware that performs addition, subtraction, and usually logical operations such as AND and OR*
+#### Arithmetic Logic Unit
+> ***ALU** Hardware that performs addition, subtraction, and usually logical operations such as AND and OR*
 
 #### exception
 > *Also caled **interupt**. An unscheduled event that disrupts program execution; used to detect overflow.*
