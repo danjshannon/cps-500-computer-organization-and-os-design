@@ -5,7 +5,8 @@
 - [Chapter 1 | *Computer Abstractions and Technology*](#Chapter-1--Computer-Abstractions-and-Technology)
 - [Chapter 2 | *Instructions: Language of the computer*](#Chapter-2--Instructions-Language-of-the-computer)
 - [Chapter 3 | *Arithmetic for Computers*](#Chapter-3--arithmetic-for-computers)
-
+- [Chapter 4 | *The Processor*](#Chapter-4--the-processor)
+- [Appendix B | *The Basics of Logic Design*](#Appendix-b--the-basics-of-logic-design)
 
 # Chapter 1 | *Computer Abstractions and Technology*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
@@ -85,7 +86,25 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 # Chapter 3 | *Arithmetic for Computers*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 
-`dividend = quotient X divisor + Remainder`
+`dividend = quotient X divisor + remainder`
 
 ## Floating Point Addition
 <img src="FloatingPointAddition.png"/>
+
+# Chapter 4 | *The Processor*
+([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
+
+
+# Appendix B | *The Basics of Logic Design*
+([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
+
+## Logical Operators (boolean algebra)
+- OR: `+`, `A + B` == `A OR B`
+  - (<code>A &or; B</code>)
+- AND: <code>&#8729;</code>, <code>A &#8729; B</code> == `A AND B`
+  - (<code>A &and; B</code>)
+- NOT: <code>&Amacr;</code> == `NOT A`
+  - (<code>&not;A</code>)
+
+- Identity law: <code>A &or; 0 = A</code> and <code>A &and; 1 = A</code>
+

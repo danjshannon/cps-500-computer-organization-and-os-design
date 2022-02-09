@@ -1,8 +1,13 @@
 # Vocab
 - [Home](/README.md#async-table-of-contents)
+- [Chapter 2](#chapter-2)
+- [Chapter 3](#chapter-3)
+- [Chapter 4](#chapter-4)
+
+- [Appendix B](#appendix-b)
 
 ## Chapter 2
-
+([top](#vocab))
 #### instruction set
 > *The vocabulary of commands understood by a given architecture.*
 
@@ -144,6 +149,9 @@
 > *A functional program in the format of an object file that contains no unresolved references. It can contain symbol tables and debugging information. A "stripped executable" does not contain that information. Relocation information may be included for the loader*
 
 ## Chapter 3
+
+([top](#vocab))
+
 #### Arithmetic Logic Unit
 > ***ALU** Hardware that performs addition, subtraction, and usually logical operations such as AND and OR*
 
@@ -191,3 +199,25 @@
 
 #### single precision 
 > *a floating-point value represented in one 32-bit word*
+
+## Chapter 4
+([top](#vocab))
+
+
+## Appendix B
+([top](#vocab))
+#### asserted signal
+> *a signal that is (logically) true, or 1*
+
+#### deasserted signal
+> *a signal that is (logically) false, or 0*
+
+
+#### combinational logic
+> *a logic system whose bock do not acontain memory and hence compute the same output given the same input*
+
+#### sequential logic
+> *a group of logic elements that contain memory and hence whose value depends on the inputs as well as the current contents of the memory*
+
+#### gate
+> *a device that implements basic logic functions, such as AND or OR*
