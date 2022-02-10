@@ -399,7 +399,7 @@ move $s3, $a1                       # copy parameter $a1 into #s3 (save $a1)
 ##### outer loop #####
 ######################
 move $s0, $zero                     # i=0
-for1tst: lst $t0, $s0, $s3          # reg $t0=0 if $so
+for1tst: slt $t0, $s0, $s3          # reg $t0=0 if $so
          beq $t0, $zero, exit1      # got to exit1 if $s0<$s3 (i<n)
 
 ##### inner loop #####
