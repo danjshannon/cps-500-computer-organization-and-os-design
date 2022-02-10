@@ -9,6 +9,7 @@
 ## Questions
 - Why do we shift left by 2 on the branch instruction? Not clear.
 - In a datapath, where do we start? Instruction memory?
+- Why move and not add `$zero`
 
 ## 5.1 Readings
 ([top](#week-5-the-processor))
@@ -223,14 +224,17 @@ ALU Actions for
 2. Load or store instruction
    - (only instuction to alter RAM)
 
+
 |field|35 or 43|rs|rt|address|
-|--|--|--|--|--|--|--|
+|--|--|--|--|--|
 |bits|31:26|25:21|20:16|15:0|
+
 
 3. Branch instruction
 
+
 |field|4|rs|rt|address|
-|--|--|--|--|--|--|--|
+|--|--|--|--|--|
 |bits|31:26|25:21|20:16|15:0|
 
 
