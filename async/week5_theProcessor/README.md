@@ -5,12 +5,15 @@
 - [5.3 Logical Design](#53-logical-design)
 - [5.4 Building a Datapath](#54-building-a-datapath)
 - [5.5 ALU Control](#55-alu-control)
+- [5.6 Pipelines](#56-Pipelines)
+- [5.7 Pipeline Hazards](#57-Pipeline-Hazards)
 
 ## Questions
 - Why do we shift left by 2 on the branch instruction? Not clear.
 - In a datapath, where do we start? Instruction memory?
 - Why move and not add `$zero`
-
+- What data structures are caches? Queues? Heaps?
+- Is it possible to write a procedure that takes care of our stack management for us?
 ## 5.1 Readings
 ([top](#week-5-the-processor))
 
@@ -224,19 +227,15 @@ ALU Actions for
 2. Load or store instruction
    - (only instuction to alter RAM)
 
-
 |field|35 or 43|rs|rt|address|
 |--|--|--|--|--|
 |bits|31:26|25:21|20:16|15:0|
 
-
 3. Branch instruction
-
 
 |field|4|rs|rt|address|
 |--|--|--|--|--|
 |bits|31:26|25:21|20:16|15:0|
-
 
 ### Seven Control Signals
 
@@ -292,3 +291,174 @@ ALU Actions for
 ### Datapath Wtih Jumps
 
 <img src='DatapathWithJumps.png' width=500 />
+
+
+## 5.6 Pipelines
+([top](#week-5-the-processor))
+
+### Why a single-cycle implemetation is not used today
+- Clock cycle must have the same length for every instruction
+- Longest delay determines clock period
+  - critical path: load instruction
+  - instruction memory &rarr; ALU &rarr; data memory &rarr; register file
+- Not feasiblle to vary period for different instructions
+- violates design principle
+  - making the common case fast
+- we wil improve performance pipelining
+
+### Pipelining Analogy
+- Pipelined laundry: overlapping execution
+  - parallellism improves performance
+
+### MIPS Pipeline
+Five stages, one step per stage
+
+1. IF: instruction fetch from memory
+2. ID: instruction decode and register read
+3. EX: execute operation or calculate address
+4. MEM: access memory operand
+5. WB: write result back to register
+
+### Pipeline Perfomance
+- Assume time for stages is
+  - 100ps for register read or rwrite
+  - 200ps for other stages
+- comare pipeline datapath with single-cycle datapath
+
+|Instruction Class|Instruction Fetch|Instruction Read|ALU Operation|Data Access|Register write| Total Time|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Load Word (lw)|200ps|100ps|200ps|200ps|100ps|800ps|
+|Store Word (sw)|200ps|100ps|200ps|200ps||700ps|
+|R-format(add, sub, AND, OR, slt)|200ps|100ps|200ps||100ps|600ps|
+|Branch (beq)|200ps|100ps|200ps| | |500ps|
+
+<img src='PipelinePerformance.png' width=500>
+
+### Pipeline Speedup
+- If all stages are balanced
+  - I.e. all take the same time
+<code>Time between instructions<sub>pipelined</sub> = Time between instruction<sub>nonpipelined</sub> / Number of stages</code>
+- If not balanced, speedup is less
+- Speedup due to increased throughput
+- Latency (time for each instruction) does not decrease
+
+### Pipelineing and ISA Design
+- MIPS ISA designed for pipelining
+- All instructions are 32-bits
+  - Easier to fetch and decode in one cycle
+  - C.f. x86: 1- to 17-byte instructions
+- Few and regular instruction formats
+  - Can decode and read registers in one step
+- Load/store addressing
+  - Can calculate address in third stage, access memory in  fourth stage
+- Alignment of memory operands
+  - Memory access takes only one cycle
+
+## 5.7 Pipeline Hazards
+([top](#week-5-the-processor))
+
+### Hazards
+- Situations that prevent starting the next instruction in the next cycle
+- **Structure hazard**
+  - A required resource is busy
+- **Data hazard**
+  - Need to wait for previous instruction to complete its data read/write
+- **Control hazard**
+  - Deciding on control action depends on previous instruction.
+
+
+### Structure Hazard
+- Conflict for use of resource
+- In MIPS pipeline whith a single memory
+  - Load/store requires data access
+  - Instruction fetch would have to stall for that cycle
+    - would cuase a pipeline *bubble*
+- Hence, pipelined datapaths require separate instruction/data memories
+  - Or separate instruction/data cache
+
+### Data Hazards
+- an instruction depends on completion of data access by a previous instruction
+
+```
+add $s0, $t0, $t1
+sub $t2, $s0, $t3
+```
+- want to parallelize
+- output from ALU has to go back to register, wait until $s0 is written
+```
+lw $s0, 20($t1)
+sub $t2, $s0, $t3
+```
+
+### Forwarding (Bypassing)
+
+- Use result when it is computerd
+  - don't wait for it to be stored in a register
+  - requres extra connections in the datapath
+    - more complex hardware to pass data forward
+
+
+<img src='Forwarding.png' width=500/>
+
+### Load: Use Data Hazard
+- can't always avoid stalls by forwarding
+  - if value not computed when needed
+  - Can't forward backward in time!
+
+<img src='LoadDataHazard.png' width=500>
+
+### Code Scheduling to Avoid Stall
+- **Reorder** code to avoid use of load result in the next instruction
+- C code for
+```C
+A = B + C;
+C = B + F;
+```
+
+```
+
+lw  $t1, 0($t0)      lw  $t1, 0($t0)
+lw  $t2, 4($t0)      lw  $t2, 4($t0)
+add $t3, $t1, $t2    lw  $t4, 8($t0)
+                     ______________
+sw  $t3, 12($t0)     add $t3, $t1, $t2
+lw  $t4, 8($t0)      sw  $t3, 12($t0)
+_______________
+add $t5, $t1, $t4    add $t5, $t1, $t4
+sq  $t5, 16($t0)     sw  $t5, 16($t0)
+
+     13 cycles          11 cycles
+```
+
+### Control Hazards
+- Branch determines flow of control
+  - Fetching next instruction depends on branch outcome
+  - Pipeline can't always fetch correct instruction
+    - Still working on ID stage of branch
+- In MIPS pipeline
+  - Need to compare registers and compute target early in pipeline
+  - Add hardward to do it in ID stage 
+
+### Stall on Branch
+- Wait until branch outcome determined before fetching next instruction
+
+### Branch Prediction
+- Longer pipelines can't readily determine branch outcome early
+  - Stall penalty becomes unacceptable
+- Predict outcome of branch
+  - only stall if prediction is wrong
+- In MIPS pipeline
+  - Can predict branches not taken
+  - Fetch instruction after branch, with no delay
+
+### More Realistice Branch Prediction
+- Static branch prediction
+  - Based on typical branch behavior
+  - Example: loop and if-statement branches
+    - predict backward branches taken
+    - predict forward branches not taken
+- Dynamic branch prediction
+  - Hardware measures actual branch behavior
+    - eg record recent history of each branch
+  - Assume future behavior will continue the trend
+    - when wrong, stall while refetching, and update history
