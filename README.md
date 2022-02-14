@@ -10,3 +10,4 @@
 - [Week 3: Instructions 2](/async/week3_instructions2/README.md#week-3-instructions-2)
 - [Week 4: Arithmetic for Computers](/async/week4_computerArithmetic/README.md#week-4-Arithmetic-for-computers)
 - [Week 5: The Processor](/async/week5_theProcessor/README.md#week-5-the-processor)
+- [Week 6: Operating System Introduction](/async/week6_operatingSystem/README.md#week-6-operating-system-introduction)
