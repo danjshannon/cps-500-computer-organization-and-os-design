@@ -1,0 +1,161 @@
+# Week 6 Operating System Introduction
+- [Home](/README.md#async-table-of-contents)
+- [6.1 Readings](#61-readings)
+- [6.2 Operating System Introduction](#62-Why-do-we-need-an-operating-system)
+- [6.3 History of the Operating System](#63-history-of-the-operating-system)
+- [6.4 Computer Organization](#64computer-organization)
+
+
+## Questions
+- What is Turing complete?
+- What is a Von Neumann Machine? 
+
+## 6.1 Readings
+([top](#week-6-operating-system-introduction))
+
+*Oh*
+[Chapter 1 | *Operating Systems Introduction*](/readings/README.md#oh-Chapter-1--operating-systems-introduction)
+
+## 6.2 Why do we need an operating system?
+([top](#week-6-operating-system-introduction))
+
+### Why do we need an OS?
+
+Two core purposes:
+1. **Abstraction**
+   - Hides low-level details of hardware implementation from and even software developer.
+> What implications would it have for software developers if there were no abstraction?
+
+### No Abstraction?
+- Programmers would need to know about the exact specifications of computer hardware (drivers)
+- Programmers would need to know where in memory (RAM) the proram would be running.
+- Programmers would likely need to configure hardware devices (Ethernet card is initialized)
+- What about hardware fault management?
+
+### Why do we need an OS?
+2. **Resource Management**
+   - Correctness in sharing of hardware resources
+   - Fair allocation of resources (multiple programs running?)
+> Implications of no resource management?
+
+### No Resource Management>
+- Multiple running programs reading from disk - would these step over each other?
+- Data protection? Could programs read/write each other's memory in RAM? On files on disk?
+- Single program hogs some resource (Disk, ethernet, etc)
+> Under what circumstances might we not need a lot of abstraction and resource management?
+
+Firmware vs Operating System
+- **Firmware**
+  - Typically runs on simple devices that execute a single function (or very simple function)
+  - Saved in nonvolatile memory
+  - BUild in to hardware, effectively part of the hardward, but can be upgraded/corrupted/infected
+
+- **Operating System**
+  - Runs multiple, highly varied functions (programs)
+  - Typically works in conjunction with firmware (will see this later)
+
+### Where can we find an OS?
+- Computers
+- Cell phones,
+- iPod
+- iPad
+- Copiers
+- Fax
+- Cars
+- Digital cameras
+- Electronc games
+- xbox
+
+## 6.3 History of the Operating System
+([top](#week-6-operating-system-introduction))
+
+### Timeline
+- Charles Babbage's Difference Engine 1823-1842
+  - mechanical calculator
+- First generation 1945-1955
+  - vacuum tubes, plug boards
+- Second generation 1955-1965
+  - Transistors, batch systems. card readers, etc
+- Third generation 1965-1980
+  - ICs and multiprogramming
+- Fourth generation 1980-present
+  - Personal computers
+- *Fifth generation* 1999-present
+  - The internet or connected
+
+### Difference Engine
+- Mechanical in nature, used to calculate polynomial functions (logarithmic/trigonometric tables)
+- Ada Lovelance wrote the first algorithm to compute the Bernoulli squence
+- Original project was not completed due to cost
+- Finally build in early '90s
+
+### First Generation
+- ENIAC was one of the Turing-complete binary computers
+- Developed at the University of Pennsylvania
+- Commissioned in 1946
+- Primarily design to compute artillery firing tables
+- Was "programmed" via switches and cables taking days (after the program was worked out on paper)
+
+### Second Generation
+- Punch cards were stored on a deck of cards
+- Each card was more or less single instruction
+
+
+#### Punch Cards
+- Punch cards ran in batches
+- Multiple programs grouped together
+- Transferred to tape
+- Ran multiple programs sequentially
+
+### Third Generation
+- Multiprogramming: When one proram was blocked on I/O, run a different one
+- Led to time-sharing, where developers had terminals at their desks
+- Microprocessor was born in 1971 at Intel
+- MULTICS (MULTiplexed Information and Computing Service) was developed. But was too big and complex
+- UNICS (UNiplexed Information and Computing Service) was a stripped-down versio. UNICS rewritten in C became UNIX.
+
+### Fourth Generation
+- Personal computing started
+- Large-scale integrated circuits introduced
+- Computers could now fit on your desk and used not just by technocrats.
+- Commercial success begins: MS-DOS, Apple Macintosh
+
+## 6.4 Computer Organization
+([top](#week-6-operating-system-introduction))
+
+> from the view of the operating system
+
+### Von Neumann Machines
+- Computers today are still Von Neumann machines
+  - Store programs in memory (along with data)
+  - fetch instruction
+  - decode instruction
+  - execute instruction
+- All Computers have the following components
+  - CPU
+  - Memory
+  - Input/Output
+
+### Fetch, Decode, Execute
+- **Program Counter**: Keeps track of address of current instruction to execute.
+- **Status Register**: Indicates current state of the processory.
+- **Instruction Register**: Hold instruction just decoded.
+- **Algorithmic Logic Unit**: Performs algorithmic and logical computations.
+
+<img src='https://upload.wikimedia.org/wikipedia/commons/0/0c/ComputerMemoryHierarchy.svg' width=500 title='Computer memory hieharchy'>
+
+> [Computer Memory Hierarchy](https://en.wikipedia.org/wiki/Memory_hierarchy)
+
+### Question
+> Why does having a cache help at all? What principles can you recall about the execution of programs?
+
+
+### Locality of Reference
+- **Spatial locality** Memory locations close to the last-used locations are likely to be used soon.
+- **Temporal locality** Memory locations used recently are likely to be used again soon.
+
+### Hard Disks
+
+<img src='HardDisk.png' width=500 />
+
+> moving parts are slower than electrons, less durable
