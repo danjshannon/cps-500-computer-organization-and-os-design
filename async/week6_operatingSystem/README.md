@@ -3,12 +3,15 @@
 - [6.1 Readings](#61-readings)
 - [6.2 Operating System Introduction](#62-Why-do-we-need-an-operating-system)
 - [6.3 History of the Operating System](#63-history-of-the-operating-system)
-- [6.4 Computer Organization](#64computer-organization)
-
+- [6.4 Computer Organization](#64-computer-organization)
+- [6.5 Boot Process](#65-boot-process)
+- [6.6 Processes](#66-processes)
+- [6.7 Address Space](#67-address-space)
 
 ## Questions
 - What is Turing complete?
 - What is a Von Neumann Machine? 
+- How do we know the initial PC of the OS?
 
 ## 6.1 Readings
 ([top](#week-6-operating-system-introduction))
@@ -159,3 +162,102 @@ Firmware vs Operating System
 <img src='HardDisk.png' width=500 />
 
 > moving parts are slower than electrons, less durable
+
+## 6.5 Boot Process
+([top](#week-6-operating-system-introduction))
+
+### Booting Process
+- Power supply strats and sends a reset signal to CPU
+- The CO Uexecutes the JUMP instruction to jump to the bootstrap program (BIOS)
+  - **BIOS** Basic Input Output Service
+- BIOS checks all the hardware and configuration
+- BIOS then looks for an OS in hard dist (or any other media)
+- OS is now loaded in the main memory.
+- Then PC is set to the first instruction of the OS
+- OS runs and initializes other stuff, starting system processes, and so on
+
+## 6.6 Processes
+([top](#week-6-operating-system-introduction))
+
+### A Program in Execution
+- A **program** is typically defined as an executable file.
+- A **process** is a program *in* execution.
+- The same program may be running multiple times on the same machine.
+
+#### Question
+- What state wshould we keep track of for a running program?
+> We want to know where the PC is for that program.
+
+### Process Control Block
+- **PCP**: operating system data structure for maintaining a process.
+- **Process state**: running, wating, and so on
+- **Program counter**: next instruction to execute for the process
+- **CPU registers**: a copy of the registers for this process
+- **Address space**: management information (stack pointer, etc)
+
+#### Question
+- Why might the OS need a copy of the register?
+> Registers contain the state of a process. I bet if you can refill all of the registers and stack, then you can pick up where you left off if you know the PC.
+
+### Multiprogramming
+- Multiprogramming: concept of running multiple processes at the same time. (Sometimes referred to as multitasking)
+- We do not assume mutiple CPIs (multiple CPUs called parallel execution)
+- Only a single process is running at any individual time.
+- OS scheduler switches between processes so quickly so as to give illusion of parallelization
+
+### Context Switching
+- A **context switch** occurs when the operating system swaps the current running process for another
+- operating system will run a subroutine to switch the current process *A* to the next process to run, *B*
+
+1. Save all of the CPU registers into the PCB for A. Mark process *A* as **ready**
+2. Load all of the registers into the CPU from process *B*'s PCB. Mark process *B* as **running**
+
+#### Question
+- What do you think the last register loaded into the CPU for the next process is?
+> It would either be the stack pointer `$sp` or the PC.
+
+### Operating System Users
+
+1. OS users
+2. Sowftware developers
+3. Operating system developers
+
+
+## 6.7 Address Space
+
+([top](#week-6-operating-system-introduction))
+
+### Process Memory
+
+Each process has its own address space consisting of:
+- **text segment** the executable program code
+- **static segment** static variables
+  - `static char* username = "dshannon";`
+  - BSS: uninitialized static variables
+- **dynamic data segment** (heap memory)
+  - `int* array = malloc(sizeof(int) * 100);`
+  - `int* array = new int[100];`
+- **stack segment**
+  - local variables
+  - *stack frames* are generated for function calls
+
+### Process Address Space
+
+|address space|address (hex)|
+|:-:|:-:|
+|stack|FFFF|
+|###########|&darr;|
+|###########|&darr;|
+|###########|&uarr;|
+|data|&uarr;|
+|text|0000|
+
+#### Question
+- How can multiple processes have their address at 0?
+> I think there's something called the virtual memory space. My guess is that some data structure keeps track of process and their true start and end addresses. Then those addresses are simply normalized to a zero starting address.
+
+### Virtual Address vs Physical Address
+- Compilers use virtual address when generating executable programs.
+  - **how could compiler know the physical address?!**
+- Generally, the process memory can go anywhere in the physical RAM.
+- Operating system is responsible for mapping between virtual and physical address spaces.

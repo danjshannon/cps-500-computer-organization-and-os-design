@@ -10,6 +10,7 @@
 
 ## Questions
 - Why do we shift left by 2 on the branch instruction? Not clear.
+  - all instruction 
 - In a datapath, where do we start? Instruction memory?
 - Why move and not add `$zero`
 - What data structures are caches? Queues? Heaps?
