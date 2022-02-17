@@ -7,6 +7,7 @@
 - [6.5 Boot Process](#65-boot-process)
 - [6.6 Processes](#66-processes)
 - [6.7 Address Space](#67-address-space)
+- [6.8 System Calls and Interupts](#68-system-calls-and-interupts)
 
 ## Questions
 - What is Turing complete?
@@ -261,3 +262,55 @@ Each process has its own address space consisting of:
   - **how could compiler know the physical address?!**
 - Generally, the process memory can go anywhere in the physical RAM.
 - Operating system is responsible for mapping between virtual and physical address spaces.
+
+
+## 6.8 System Calls and Interupts
+([top](#week-6-operating-system-introduction))
+
+#### Question
+- If the CPU on ever does fetch, decode, and execute, how does the code for doing the context switch logic get run?
+
+> Have a stack of process counters. 
+
+### Interupts
+- Since we can't inject new code, hardware has to help!
+- An **interrupt** is a signal to the processor that something needs attention.
+- An interrupt can be triggered via software OR hardware (but CPU must support)
+<br>
+- **HW interrupt** Typically via a device: keyboard, disk, Ethernet, etc. These are asynchronous and **can come at anytime**.
+<br>
+- **SW interrupt** Triggered via a **trap** which can be triggered by a **fault** (divide-by-zero) or a **system call**.
+
+### System Call
+- System calls are exposed for software developers to invoke code in the operating system.
+- **Access devices**:
+  - Read from file
+  - Get mouse position
+  - Create directory
+  - Open a webpage
+- **Impact OS management**:
+  - Open an applicatoin (creates a new process)
+  - Allocate space for new variable in heap.
+
+### Kernel vs User Mode
+- Once the trap has occured, the operating system switchs to privileged mode (special CPU flag/register to enable kernel mode).
+- When kernel mode = true, code run is allowed to control the devices and execute in privileged mode.
+
+### Interrupt Handling
+
+- Program A is running
+0. Interrupt signal is received
+1. Hardware stacks program counter and so on.
+2. Hardware loads new program counter from interrupt vector.
+3. Assembly language procedure saves registers.
+4. Assembly language procedure sets up a new stack.
+5. C interrupt service runs (typically reads and buffers input)
+6. Scheduler decides which process is to run next.
+7. C procedure returns to assembly code.
+8. Assembly language procedure starts up new/current process.
+
+### Interrupt Vector (Table)
+- Associates interrupt requests with interrupt handlers (code).
+
+<img src='InterruptVector.png' width=500/>
+
