@@ -11,7 +11,7 @@
 
 ## Questions
 - What is Turing complete?
-- What is a Von Neumann Machine? 
+- What is a Von Neumann Machine?
 - How do we know the initial PC of the OS?
 
 ## 6.1 Readings

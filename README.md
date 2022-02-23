@@ -11,3 +11,4 @@
 - [Week 4: Arithmetic for Computers](/async/week4_computerArithmetic/README.md#week-4-Arithmetic-for-computers)
 - [Week 5: The Processor](/async/week5_theProcessor/README.md#week-5-the-processor)
 - [Week 6: Operating System Introduction](/async/week6_operatingSystem/README.md#week-6-operating-system-introduction)
+- [Week 7: Processes and Threads](/async/week7_processesThreads/README.md#week-7-processes-and-threads)
