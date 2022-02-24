@@ -4,9 +4,12 @@
 - [7.1 Readings](#71-readings)
 - [7.2 Processes Creation](#72-processes-creation)
 - [7.3 Process Life Cycle](#73-process-lifecycle)
+- [7.4 Threads](#74-threads)
 
 ## Questions
-
+- Why would there be a kernel thread vs user thread?
+- In the web server example, is that a kernel thread or a user thread?
+  - Kernel?
 
 ## 7.1 Readings
 ([top](#week-7-processes-and-threads))
@@ -159,3 +162,68 @@ main(){
 }
 ```
 > an example of using `fork()`, `exe()`,` waitpid()`, and `exit()` system calls
+
+## 7.4 Threads
+([top](#week-7-processes-and-threads))
+
+### Thread Motivations
+- **Blocking system call** needs to wait on some I/O, such as disk read. Sometimes called **synchronous** call. Entire process is put into **blocked** state.
+- **Non-blocking system call** (ie **asynchronous**) kicks off a request (typically to a device) but doesn't wait for completion. Polling, signals, callbacks, or threads would be needed to handle the result.
+
+### Threads
+- A **thread** (or thread-of-execution) is a component of a process that allows intra-process parallelization.
+- A thread has stack and its own set of registers, but *shares the process address space* with other threads within the same process.
+
+### Thread Example
+
+- Web server processes take thousands of requests per second.
+
+<img src='ThreadExample.png' width=500>
+
+### Proces vs Thread
+
+#### Per Process Items (shared accross threads)
+- address space
+- global variables
+- open files
+- child processes
+- pending alarms
+- signals and signal handlers
+- accounting information
+
+#### Per Thread Items
+- program counter
+- registers
+- stack
+- state
+
+
+### User Threads vs Kernel Threads
+Threads can be implemented in either the kernel or user space.
+
+- **kernel threads**:
+  - Kernel manages thread state
+  - Scheduling can be **pre-emptive** (we can force out a thread).
+  - Easy support for blocking system calls.
+  - System calls required for scheduling, update, or creation.
+- **user threads**:
+  - Kernel is completely unaware of threading
+  - User process/library manages thread state
+  - Pre-emption is not possible; threads must leave on their own.
+  - Generally require nonblocking system calls (in OS)
+  - No system call for scheduling, update, or creation
+
+> System calls are expensive. User threads are a little faster from the management perspective.
+
+> Most threads will be kernel threads
+
+### Treads in Java
+- JVM is really a specification; native (kernel threads) may not exist on the host OS. In that case JVM uses user-space threads (called **green threads**)
+- Two ways to implement:
+  - Implement thread subclass
+  - Write class that implements runnable interface
+
+#### Question
+- How can you write a java program to test if threads are natively supported in the OS?
+
+> we can try to run two blocking processes at the same time

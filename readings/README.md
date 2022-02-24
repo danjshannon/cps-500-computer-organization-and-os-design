@@ -6,6 +6,7 @@
 - [Chapter 2 | *Instructions: Language of the computer*](#Chapter-2--Instructions-Language-of-the-computer)
 - [Chapter 3 | *Arithmetic for Computers*](#Chapter-3--arithmetic-for-computers)
 - [Chapter 4 | *The Processor*](#Chapter-4--the-processor)
+- [Appendix A](#Appendix-a)
 - [Appendix B | *The Basics of Logic Design*](#Appendix-b--the-basics-of-logic-design)
 
 # Chapter 1 | *Computer Abstractions and Technology*
@@ -93,6 +94,11 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 # Chapter 4 | *The Processor*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 
+# Appendix A
+([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
+
+<img src='MipsOpcode.png'>
+> Figure A.10.2 Mips Opcode Map
 
 # Appendix B | *The Basics of Logic Design*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
