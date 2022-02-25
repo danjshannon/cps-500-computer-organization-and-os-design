@@ -5,11 +5,15 @@
 - [7.2 Processes Creation](#72-processes-creation)
 - [7.3 Process Life Cycle](#73-process-lifecycle)
 - [7.4 Threads](#74-threads)
+- [7.5 Java Threads](#75-java-threads)
+- [7.6 OS Scheduler](#76-os-scheduler)
+- [7.7 Round Robin Scheduler](#77-round-robin-scheduler)
 
 ## Questions
 - Why would there be a kernel thread vs user thread?
 - In the web server example, is that a kernel thread or a user thread?
   - Kernel?
+- Is OS indepenedent of architecture?   
 
 ## 7.1 Readings
 ([top](#week-7-processes-and-threads))
@@ -227,3 +231,145 @@ Threads can be implemented in either the kernel or user space.
 - How can you write a java program to test if threads are natively supported in the OS?
 
 > we can try to run two blocking processes at the same time
+
+## 7.5 Java Threads
+([top](#week-7-processes-and-threads))
+
+```java
+/*
+ * JavaThreadExtender is a simple Java thread example.
+*/
+import java.util.ArrayList;
+import java.util.List;
+
+public class JavaThreadExtender extends Thread{
+  private int number;
+  public JavaThreadExtender(int i){
+    super("MyThread:" + i);
+    this.number = i;
+  }
+  public void run(){
+    for (int i=0; i < number; i++) {
+      // pritnln thread-safe?
+      System.out.println(number + ":" + i);
+    }
+  }
+
+  public static void main(String[] argv){
+    List<Thread> threads = new ArrayList<Thread>();
+    for (int i = 0; i<20; i++) {
+      Thread t = new JavaTreadExtender(i);
+      threads.add(t);
+      // moving thread to ready state
+      t.start();
+    }
+  }
+}
+```
+> `JavaThreadExtender.java`
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class JavaThreadRunnable implements Runnable {
+  private int number;
+
+  public JavaThreadRunnable(int i){
+    this number = i;
+  }
+
+  public void run(){
+    for (int i = 0; i < number; i++) {
+      System.out.println(number + ":" + i);
+    }
+  }
+
+  public static void main(String[] argv){
+    List<Thread> threads = new ArrayList<Thread>();
+    for (int i = 0; i < 20; i++){
+      Thread t = new Thread(new JavaThreadrunnable(i));
+      threads.add(t);
+      t.start();
+    }
+  }
+}
+```
+> `JavaThreadRunnable.java`
+
+## 7.6 OS Scheduler
+([top](#week-7-processes-and-threads))
+
+### OS Sheduler
+- Decision amde by OS designers: What is the schedulable entity? Process? Thread? Other?
+- What type of system is the scheuler being designed for? Batch? Personal computing?
+
+### Preemption
+- **Preemption** happens when the OS scheduler forces a thread/process out of the CPU without its consent
+- OS Needs to be able to do this
+- Otherwise a process could *starve* all other process in the system.
+
+- Another system call `yield` that simply puts the currently running process back on to the ready queue (i.e. out of the CPU)
+
+### Ready Queue
+- The scheduler (kernel) will keep a list of all of the jobs that are in state **ready**, called the **ready queue**
+- when a job becomes unblocked it is moved into the **ready queue**. The logic of how to insert into the list is scheduler specific.
+- When it is time to pick the next process/thread to run, the scheduler typically picks the front of the list
+
+### Scheduler Performance?
+- **Throughput**: The number of processes (jobs) completed in a specific time unit (eg five jobs/millisecond)
+- **Turnaround time**: Time between the reqeust to run and the job's completion. Average, max, and min may all be important.
+- **Wait time**: Time spent waiting to run. Average, max, and min may all be important
+- **Starvation**: Can the policies of the scheduler lead to a process never getting to run?
+- **Complexity overhead**: Complex software is hard to maintain and check for correctness. In general we'd like the simplest algorithm that acheives our goals.
+
+### Batch Schedulers
+In batch mode, typically a process is run that does not depend upon any user interaction. Example: MapReduce jobs at Google/Amazon/etc
+- **FIFO** (first in first out)
+  - The first process that requests to run is run until completion
+- **Shortest job first**
+  - Job with the shortes time will run to completion
+- **Shortest remaining time**
+  - Similar to SJF, but jobs can be interrupted if a shorter job arrives
+- **Priority based**
+  - Jobs are assigned a priority. Job with highest priority runs to completion.
+
+#### Question
+- What kind of problems would you anticipate with shortest job first compared to FCFS?
+> With shortest job first, long jobs may never get to run. With FCFS, a long job could block what should be short jobs.
+
+## 7.7 Round Robin Scheduler
+([top](#week-7-processes-and-threads))
+
+### Round Robin Scheduler
+- RR scheduler is a pre-emptive scheduler
+- Each job is given a fixed quanta of time to run in the CPU
+- All jobs are treated equally (no priority classes)
+- Straight forward and starvation free
+
+#### Round Robin Example
+- quanta = 10ms
+
+|Process|Arrival Time (ms)|Run Time (ms)|
+|:-|:-|:-|
+|P0|0|22|
+|P1|5|15|
+|P2|13|8|
+
+|Time (ms)|Current Process|Next Process|Ready Queue| Notes|
+|:-|:-|:-|:-|:-|
+|0|EMPTY|P0|P0,|P0 arrives|
+|5|P0|N/A|P1,|P1 arrives|
+|10|P0|P1|P0|Quanta expired|
+|13|P1|N/A|P0,P2|P2 arrives|
+|20|P1|P0|P2,P1|Quanta expired|
+|30|P0|P2|P1,P0|Quanta expired|
+|38|P2|P1|P0|P2 completes|
+|43|P1|P0|Empty|P1 completes|
+|45|P0|EMPTY|EMPTY|P0 completes|
+
+> every 10ms execute a hardware interrupt
+
+#### Question
+- Other than quanta expiration, what are two other reasons the scheduler might have to choose a different job to run?
+> Exception from divide by zero or overflow. And interrupt from a user appliction.

@@ -32,6 +32,7 @@ Time = Seconds/Program = Instructions/Program X ClockCycles/Instruction X Second
 
 # Chapter 2 | *Instructions: Language of the Computer*
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
+
 ### The Big Picture
 > Today's computers are built on two key principles:
 >   1. Instructions are represented as numbers.
