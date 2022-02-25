@@ -99,6 +99,8 @@ beq $t0, $zero, IndexOutOfBounds #if bad, goto Error label
 ([top](#Computer-Organization-and-Design--The-HardwareSoftware-Interface))
 
 <img src='MipsOpcode.png'>
+<img src="FigureA_10_2_annotation.png" width=500>
+
 > Figure A.10.2 Mips Opcode Map
 
 # Appendix B | *The Basics of Logic Design*
