@@ -8,12 +8,15 @@
 - [7.5 Java Threads](#75-java-threads)
 - [7.6 OS Scheduler](#76-os-scheduler)
 - [7.7 Round Robin Scheduler](#77-round-robin-scheduler)
+- [7.8 Multilevel Feedback Queues](#78-multilevel-feedback-queues)
+- [7.9 Completely Fair Scheduler](#79-completely-fair-scheduler)
 
 ## Questions
 - Why would there be a kernel thread vs user thread?
 - In the web server example, is that a kernel thread or a user thread?
   - Kernel?
-- Is OS indepenedent of architecture?   
+- Is OS indepenedent of architecture?
+- Are job queues ever empty?
 
 ## 7.1 Readings
 ([top](#week-7-processes-and-threads))
@@ -373,3 +376,50 @@ In batch mode, typically a process is run that does not depend upon any user int
 #### Question
 - Other than quanta expiration, what are two other reasons the scheduler might have to choose a different job to run?
 > Exception from divide by zero or overflow. And interrupt from a user appliction.
+
+
+## 7.8 Multilevel Feedback Queues
+([top](#week-7-processes-and-threads))
+
+### Multilevel Queue
+- Multiple queues tiered by priority
+- All jobs from highest priority queue must be empty to begin next lower queue
+- Within a given queue, any other scheduling algorithm can be used (first in first out, shortest job, round robin)
+- Jobs to not change queue
+- Provides a strict way of grouping together jobs from different users but same priority.
+
+### Multilevel Feedback Queue
+- Multiple queues
+- Most jobs are mixutre of I/O and CPU
+- Highest priority queue is for I/O heavy jobs
+- Lowest priority queue is for CPU heavy jobs
+- all jobs start at the highest priority queue
+- Jobs that are preempted (use all of the time quanta) are booted to lower priority queue.
+- Quanta generally increases indirectly with priority
+  - higher priority, higher quanta
+- Jobs that block on I/O go up to next higher priority queue
+- Job is pre-empted if higher priority jobs arrives
+
+### Mutlilevel Feedback Queue Example
+
+<img src='multilevelFeedbackQueue.png' width=500 title='multilevelFeedbackQueue'>
+
+#### Question
+- Between multilevel queue vs multilevel feedback queue, which might lead to starvation?
+
+> Multilevel queues might lead to starvation because jobs do not change queue. Since we shift queues when the quanta expires, jobs are probably always going to get worked on even if they are in the lowest level because the quanta is so long.
+
+## 7.9 Completely Fair Scheduler
+([top](#week-7-processes-and-threads))
+
+### Completely Fair Scheduler
+- Tries to model an ideal multitasking CPU: run each task at 1/N equal speed, in parallel
+- When a process arrives, record the current system time
+- Keep track of how long each process has been waiting for the CPU (update the wait time based on the process ID and the number of processes in the queue)
+- Decrement the wait value when the process gets on the CPU
+
+### Implementation Details
+- Use a red/black tree to keep track of which process has the longest wait
+- red/black tree:
+  - self-balancing binary tree
+  - operations take Log(N)
