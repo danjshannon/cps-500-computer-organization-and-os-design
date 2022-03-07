@@ -19,7 +19,7 @@
 ([top](#week-8-processes-and-threads))
 
 *Oh*
-[Chapter 3 | *Synchronization*](/readings/README.md#oh-Chapter-3--synchronization)
+[Chapter 4 | *Synchronization*](/readings/README.md#oh-Chapter-4--synchronization)
 
 ## 8.2 Concurrency
 ([top](#week-8-Synchronization))
