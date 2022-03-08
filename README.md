@@ -12,3 +12,5 @@
 - [Week 5: The Processor](/async/week5_theProcessor/README.md#week-5-the-processor)
 - [Week 6: Operating System Introduction](/async/week6_operatingSystem/README.md#week-6-operating-system-introduction)
 - [Week 7: Processes and Threads](/async/week7_processesThreads/README.md#week-7-processes-and-threads)
+- [Week 8: Synchronization](/async/week8_synchronization/README.md#week-8-synchronization)
+- [Week 9: Memory Management](/async/week9_memoryManagement/README.md#week-9-memory-management)
