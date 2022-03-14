@@ -1,4 +1,4 @@
-# CPS 500 Computer Organizatoin and Operating System Design | *Syracuse University*
+# CPS 500 Computer Organization and Operating System Design | *Syracuse University*
 ## cps-500-computer-organization-and-os-design
 ### Computer Organization and OS Design Table of Contents
 

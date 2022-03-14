@@ -6,9 +6,12 @@
 - [9.3 Contiguous Memory Allocation](#93-contiguous-memory-allocation)
 - [9.4 Noncontiguous Memory Allocation](#94-noncontiguous-memory-allocation)
 - [9.5 Page Table Alternatives](#95-page-table-alternatives)
+- [9.6 Swapping](#96-swapping)
+- [9.7 Page Replacement Algorithms](#97-page-replacement-algorithms)
+- [9.8 Segmentation](#98-segmentation)
 
 ## Questions
-
+- Similar to how every compuer has IO, processor, and memory, is there a standard set of operations for operating systems? We've been discussing operating systems, but what makes and OS an OS?
 
 ## 9.1 Readings
 ([top](#week-9-memory-management))
@@ -188,3 +191,133 @@ How big will the inverted page table be?
 
 > 8MB 
 `	(4GB = 2^32) / (8kb = 2^13) = 2^19 page frames * (16 bytes per IPT entry ) 2^4 bytes = 2^23 bytes = 8 MB`
+
+## 9.6 Swapping
+([top](#week-9-memory-management))
+
+- If translation fails (page is not in physical memory), system generates a **page fault**
+- A page fault is an interrupt which triggers the page fault handler to run
+- Page fault handler is OS code that decides what to do when a page fault occurs
+- In the simplest scenario, the page fault handler will block the current process and schedule a disk read to copy the missing page into RAM
+- Once the read is completed, the page table is updated and the process unblocked.
+
+### Prefetching
+- A heuristic approach can bring several surrounding pages into RAM on a page fault.
+- Leverages locality of reference to try to predict what pages might be needed soon.
+- If we had a page fault on virtuall page X, the prefetching might bring in X-2, X-1, X, X+1, X+2
+
+### RAM Full?
+- If RAM is full, OS can't just copy a missing page right from disk
+- First a page must be evicted from RAM
+- Algorithm to choose a **victi** page is called **Page replacement algorithm**
+- Page replacement algorithms try to choose which page is least likely to be needed again (soon)
+- If the victim page has been modified, it needs to be written out to disk.
+
+### Thrashing
+- What happens if we keep pushing out a page we need soon?
+- Continuously paging in/out from RAM to disk is a state known as **thrashing**
+- Imagine reversing locality of reference in a large program. We can do this with a huge array and carfuly engineered access pattern
+
+
+## 9.7 Page Replacement Algorithms
+([top](#week-9-memory-management))
+
+### FIFO Replacement Algorithms
+- Keep track of the time at which pages are brough into main memory
+- When a page needs to be evicted, kick out the oldest page
+- Simple to implement
+- Not very effective
+
+### Second Change Algorithm
+- Keep track of the order that the pages came into memory (just like FIFO)
+- On a memory reference, set a referenced bit, **R**, associated with a page
+- On a page fault, check the oldest page; if it is referenced, insert it according to the current time. Clear the R bit
+- If all pages are referenced, then algorithm reduces to FIFO
+
+### NRU: Not Recently Used
+- Keep track of two bits per page:
+  - Referenced, `R`: Set to `1` when the page has been read since the last clock interrupt. When the clock interrupt occurs, clear all of these bits (set to `0`)
+  - Dirty, `D`: Set to `1` when  the page has changed since it was brought into RAM
+- Prereference order to select victim from:
+
+1. `R:0`, `D:0`
+   - only 1 action, write to memory
+2. `R:0`, `D:1`
+3. `R:1`, `D:0`
+4. `R:1`, `D:1`
+
+
+### LRU: Least Recently Used
+- Keep track of each page reference
+- Two implementation options:
+  1. Linked-list: for every page reference, move the referenced page to the front of the list. Pull victim page from tail.
+  2. Keep a counter and increment on every page reference; victim is chosen with lowest counter.
+- Clearly expensive since we need to record every page reference.
+
+
+### NFU: Not Frequently Used
+- Approximately LRU
+- Set a referenced bit on memeory references
+- On a clock interrupt, check the referenced bit and add it to the counter
+- Page can be referenced multiple times between clock interrupts
+- Choose victim page with lowest counter
+
+### NFU with Aging
+- Main problem with NFU is that it never forgets in the counter; LRU also has this problem
+- Before we add referenced bit to the counter, right bit shift the counter
+- Add referenced bit to the most significant bit in the counter
+- More recent bit impacts the counter more.
+
+
+`101010`
+right shift with reference bit
+`R10101`
+
+### Two-Handed Clock (Used in UNIX)
+- Attempts to leave a certain number of pages free proactively, rather than reactionary policy
+- Page frames kept in in a circular queue
+- Two hands, both pointing to pages in the circular queue
+- First hand sets the `R` bit to `0`
+- Second evicts the page if the `R` bit is `0`
+- Set the `R` bit to `1` on a memory reference
+- Can be run by a proactive paging daemon (background process)
+- The hands rotate until they have kicked out enough pages
+
+
+### Working Set
+- Attempts to leverage locality of reference to keep the `k` most recent memory references in RAM (working set of pages)
+- Replacement algorithm attempts to find a page that is NOT in the working set and evict it.
+
+### List of Page Replacement Algorithms
+
+|Algorithm|Comment|
+|:-|:-|
+|Optimal|Not implementable, but useful as a benchmark|
+|NRU (Not Recently Used)|Very crude|
+|FIFO (First-in, First-out)|Might throw out important pages|
+|Second chance|Big improvement over FIFO|
+|Clock|Realistic|
+|LRU (Least Recently Used)|Excellent, but difficult to implement exactly|
+|NFU (Not Frequently Used)|Fairly crude approximation to LRU|
+|Aging|Efficient algorithm that approximates LRU well|
+|Working set|Somewhat expensive to implement|
+|WSClock|Good efficient algorithm|
+
+## 9.8 Segmentation
+([top](#week-9-memory-management))
+
+### Multiple Virtual Address Spaces
+- Can a process have more than one virtual address space?
+- So far we had one-dimensional address space from 0 to max.
+- Process address space has multiple segments:
+  - instructions
+  - data
+  - stack
+  - heap
+- each segment starts at zero independen of eachother
+
+
+### Segmentation
+- Each segment is a separate virtual address space
+- Allows stack and heap to grow independently
+- Can be implemented with paging or purely without paging.

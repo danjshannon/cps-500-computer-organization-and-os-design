@@ -27,7 +27,7 @@
 
 Two core purposes:
 1. **Abstraction**
-   - Hides low-level details of hardware implementation from and even software developer.
+   - Hides low-level details of hardware implementation from users and even software developer.
 > What implications would it have for software developers if there were no abstraction?
 
 ### No Abstraction?
