@@ -151,7 +151,7 @@ class Semaphore {
 private:
     // Counter
     int value;
-    // list of processes sleepin gin the semaphore
+    // list of processes sleeping in the semaphore
     std::vector<Process*> *queue;
 public:
     // acquire lock
@@ -331,7 +331,7 @@ Semaphores and mutexes can be prone to errors
 
 - When another thread calls **signal** on the conditional variable, one of the bocked threads is allowed to progress.
   - the thread calling signal must own the monitor lock.
-  - **Boradcast** will unblock all of the blocked threads
+  - **Broadcast** will unblock all of the blocked threads
   - Signal has no effect if no threads are blocked (ie no count variable associated with condtion variables)
 
 ### Producer Consumer with Monitors
@@ -395,7 +395,7 @@ end;
 - Periodically check for deadlock state.
 - Construct the wait-for graph, and kill one or more threads/processes that are deadlocked
 
-### Deadlock Aoidance
+### Deadlock Avoidance
 - Before granting requests for locks, the operating system checks if granting that request would move the system into an **unsafe state**
 - and unsafe state occurs when there is the possibility of deadlock
 - *Dijkstra* developed the banker's algorithm to achieve deadlock avoidance

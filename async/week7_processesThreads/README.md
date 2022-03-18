@@ -108,7 +108,7 @@ end Algorithm Fork()
 - Windows has no concept of process hierarchy
   - All processes are created equal
 
-## 6.3 Process Life Cycle
+## 7.3 Process Life Cycle
 ([top](#week-7-processes-and-threads))
 
 ### Process States

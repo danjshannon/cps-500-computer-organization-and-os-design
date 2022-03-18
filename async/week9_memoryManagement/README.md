@@ -209,7 +209,7 @@ How big will the inverted page table be?
 ### RAM Full?
 - If RAM is full, OS can't just copy a missing page right from disk
 - First a page must be evicted from RAM
-- Algorithm to choose a **victi** page is called **Page replacement algorithm**
+- Algorithm to choose a **victim** page is called **Page replacement algorithm**
 - Page replacement algorithms try to choose which page is least likely to be needed again (soon)
 - If the victim page has been modified, it needs to be written out to disk.
 
