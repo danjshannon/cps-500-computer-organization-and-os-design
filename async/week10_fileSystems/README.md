@@ -90,7 +90,7 @@ b. State of the disk after files D and F have been removed
 
 <img src='fileAllocationTable.png' width=500 />
 
-> Linked list using a file allocaiton table in RAM
+> Linked list using a file allocation table in RAM
 
 ### File Allocation  Table Trade-Offs
 - Advantages:
