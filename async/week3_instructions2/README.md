@@ -207,7 +207,7 @@ sltu $t0, $s0, $s1 # unsigned
 - Procedure return: jump-register
   - `jr $ra`
   - copies `$ra` to program counter
-  - can alos be used for computed jumps
+  - can also be used for computed jumps
   - e.g. for case/switch statements
 
 #### Question
@@ -236,7 +236,7 @@ int leaf_example(int g, int h , int i, int j){
 - Result in `$v0`
 
 ### Leaf Procedure Example [2]
-Mips code:
+MIPS code:
 ```
 leaf example:          # prcedure label
 
@@ -359,7 +359,7 @@ void swap(int v[], int k){
 ```
 ##### Procedure Body #####
 swap:
-      sll $r1, $a1, 2    # reg $t1 = k * 4
+      sll $t1, $a1, 2    # reg $t1 = k * 4
       add $t1, $a0. $t1  # reg $t1 = v + (k * 4)
                          # reg $t1 has the address of v[k]
       lw  $t0. 0($t1)    # reg $t0 (temp) = v[k]

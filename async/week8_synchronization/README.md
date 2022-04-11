@@ -84,7 +84,7 @@ class MyThreadExample extends Thread{
 ### Attempted Solutions
 ### Mutual Exclusion
 - **Mutual exclusion** only one thread can enter a critical section at the same time
-- solution myst be free from **deadlocks**
+- Solution must be free from **deadlocks**
 - **Deadlock** occurs when two or more processes/threads are waiting on each other in such a way that they will never wake up.
 
 ### Four conditions for mutual exclusion

@@ -276,9 +276,7 @@ Each process has its own address space consisting of:
 - Since we can't inject new code, hardware has to help!
 - An **interrupt** is a signal to the processor that something needs attention.
 - An interrupt can be triggered via software OR hardware (but CPU must support)
-<br>
 - **HW interrupt** Typically via a device: keyboard, disk, Ethernet, etc. These are asynchronous and **can come at anytime**.
-<br>
 - **SW interrupt** Triggered via a **trap** which can be triggered by a **fault** (divide-by-zero) or a **system call**.
 
 ### System Call
